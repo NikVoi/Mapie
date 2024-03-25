@@ -1,0 +1,8 @@
+.button {
+	@apply flex justify-center text-3xl bg-white w-full font-medium py-4 rounded-xl border border-solid border-gray-400
+hover:bg-gray-200 hover:duration-300;
+}
+
+.ico {
+	@apply w-8 mr-6;
+}

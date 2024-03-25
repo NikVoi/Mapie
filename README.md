@@ -1,1 +1,1 @@
-# Mapie
+# React + TypeScript + Vite

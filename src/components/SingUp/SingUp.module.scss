@@ -1,0 +1,33 @@
+.sing {
+	@apply flex flex-col justify-center items-center text-4xl h-full;
+}
+
+.wrapper {
+	@apply relative w-36 bg-white p-12 rounded-3xl;
+}
+
+.title {
+	@apply text-5xl font-extrabold mb-5;
+}
+
+.description {
+	@apply text-3xl font-semibold mb-10;
+}
+
+.line {
+	@apply relative w-full my-10 opacity-50 text-center  text-3xl
+	after:content-[''] after:border-b after:border-solid after:border-gray-700 after:w-1/5 after:absolute after:top-5 after:right-0 
+	before:content-[''] before:border-b before:border-solid before:border-gray-700 before:w-1/5 before:absolute before:top-5 before:left-0;
+}
+
+.footer {
+	@apply text-xl font-semibold flex justify-center mt-5;
+
+	> span {
+		@apply mr-2;
+	}
+
+	.link {
+		@apply text-blue-600 hover:text-blue-500 hover:duration-300;
+	}
+}
