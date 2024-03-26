@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './font/stylesheet.css';
+
 * {
 	padding: 0;
 	margin: 0;
@@ -37,7 +39,7 @@ body,
 	height: 100%;
 	width: 100%;
 	font-size: 100%;
-	font-family: 'Nunito Sans', sans-serif;
+	font-family: 'Mont', sans-serif;
 	line-height: 1;
 	font-size: 10px;
 	-ms-text-size-adjust: 100%;
