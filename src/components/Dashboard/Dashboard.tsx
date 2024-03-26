@@ -1,9 +1,9 @@
 import styles from './Dashboard.module.scss'
 
+import { logout } from '@/store/slices/authSlice'
+import { RootState } from '@/store/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
-import { logout } from '../../store/slices/authSlice'
-import { RootState } from '../../store/store'
 
 const Dashboard = () => {
 	const isAuthenticated = useSelector(

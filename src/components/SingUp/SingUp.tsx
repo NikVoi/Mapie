@@ -1,15 +1,15 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import useLogInWithGoogle from '../../hook/auth/useLogInWithGoogle'
+import useSignUpWithEmailAndPassword from '@/hooks//auth/useSignUpWithEmailAndPassword'
+import useLogInWithGoogle from '@/hooks/auth/useLogInWithGoogle'
 
-import CustomAlert from '../CustomAlert/CustomAlert'
-import Button from '../UI/Button/Button'
-import ButtonGoogle from '../UI/ButtonGoogle/ButtonGoogle'
+import AuthForm from '@/components/AuthForm/AuthForm'
+import CustomAlert from '@/components/CustomAlert/CustomAlert'
+import Button from '@/components/UI/Button/Button'
+import ButtonGoogle from '@/components/UI/ButtonGoogle/ButtonGoogle'
+
 import styles from './SingUp.module.scss'
-
-import { useState } from 'react'
-import useSignUpWithEmailAndPassword from '../../hook//auth/useSignUpWithEmailAndPassword'
-import AuthForm from '../AuthForm/AuthForm'
 
 const SingUp = () => {
 	const [userEmail, setUserEmail] = useState<string>('')

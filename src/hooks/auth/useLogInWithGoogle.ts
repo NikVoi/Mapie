@@ -1,9 +1,10 @@
 import { signInWithPopup } from 'firebase/auth'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { auth, googleProvider } from '../../firebase/firebase'
-import { login } from '../../store/slices/authSlice'
-import { RootState } from '../../store/store'
+
+import { auth, googleProvider } from '@/firebase'
+import { login } from '@store/slices/authSlice'
+import { RootState } from '@store/store'
 
 const useLogInWithGoogle = () => {
 	const dispatch = useDispatch()
@@ -31,7 +32,8 @@ const useLogInWithGoogle = () => {
 			dispatch(login({ token, userEmail }))
 			navigate('/dashboard')
 		} catch (error: any) {
-			console.error('Ошибка аутентификации через Google:', error)
+			const newLocal = 'Ошибка аутентификации через Google:'
+			console.error(newLocal, error)
 		}
 	}
 	return { handleLogInWithGoogle }

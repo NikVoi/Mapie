@@ -2,9 +2,9 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { auth } from '../../firebase/firebase'
-import { login } from '../../store/slices/authSlice'
-import { RootState } from '../../store/store'
+import { login } from '@store/slices/authSlice'
+import { RootState } from '@store/store'
+import { auth } from '../../firebase'
 
 interface Props {
 	userEmail: string

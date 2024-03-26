@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 
-import { auth } from '../../firebase/firebase'
+import { auth } from '@/firebase'
 
 interface Props {
 	userEmail: string

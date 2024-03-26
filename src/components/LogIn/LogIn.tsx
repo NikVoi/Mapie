@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import useLogInWithGoogle from '../../hook/auth/useLogInWithGoogle'
+import useSingInWithEmail from '@/hooks/auth/useLogInWithEmail'
+import useLogInWithGoogle from '@/hooks/auth/useLogInWithGoogle'
 
-import useSingInWithEmail from '../../hook/auth/useLogInWithEmail'
-import AuthForm from '../AuthForm/AuthForm'
-import CustomAlert from '../CustomAlert/CustomAlert'
-import Button from '../UI/Button/Button'
-import ButtonGoogle from '../UI/ButtonGoogle/ButtonGoogle'
+import AuthForm from '@/components/AuthForm/AuthForm'
+import CustomAlert from '@/components/CustomAlert/CustomAlert'
+import Button from '@/components/UI/Button/Button'
+import ButtonGoogle from '@/components/UI/ButtonGoogle/ButtonGoogle'
+
 import styles from './LogIn.module.scss'
 
 export default function LogIn() {

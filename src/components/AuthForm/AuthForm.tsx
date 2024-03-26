@@ -1,4 +1,4 @@
-import Input from '../UI/Input/Input'
+import Input from '@/components/UI/Input/Input'
 
 interface Props {
 	handleInputEmail: (e: React.ChangeEvent<HTMLInputElement>) => void
