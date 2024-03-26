@@ -38,7 +38,7 @@ const useSingInWithEmail = () => {
 
 			console.log('Пользователь успешно авторизован:', user.user)
 
-			const token = 'ajksdbnfasikdjlbflsadikjfb'
+			const token = user.user.refreshToken
 
 			dispatch(login({ token, userEmail }))
 

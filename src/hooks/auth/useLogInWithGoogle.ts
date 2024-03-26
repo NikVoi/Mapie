@@ -23,8 +23,7 @@ const useLogInWithGoogle = () => {
 				'Пользователь успешно аутентифицирован с помощью Google:',
 				user
 			)
-
-			const token = 'ajksdbnfasikdjlbflsadikjfb'
+			const token = user.refreshToken
 			const userEmail = user.email ?? ''
 
 			// Почему оно не воспренимаеться как string

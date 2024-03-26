@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Link, Navigate } from 'react-router-dom'
 
 import useSignUpWithEmailAndPassword from '@/hooks//auth/useSignUpWithEmailAndPassword'
 import useLogInWithGoogle from '@/hooks/auth/useLogInWithGoogle'
@@ -8,6 +9,8 @@ import AuthForm from '@/components/AuthForm/AuthForm'
 import CustomAlert from '@/components/CustomAlert/CustomAlert'
 import Button from '@/components/UI/Button/Button'
 import ButtonGoogle from '@/components/UI/ButtonGoogle/ButtonGoogle'
+
+import { RootState } from '@/store/store'
 
 import styles from './SingUp.module.scss'
 
@@ -37,6 +40,14 @@ const SingUp = () => {
 			setMessage,
 			setTypeAlert,
 		})
+	}
+
+	const isAuthenticated = useSelector(
+		(state: RootState) => state.auth.isAuthenticated
+	)
+
+	if (isAuthenticated) {
+		return <Navigate to='/dashboard' />
 	}
 
 	return (
