@@ -2,8 +2,6 @@ import { getAnalytics } from 'firebase/analytics'
 import { initializeApp } from 'firebase/app'
 import { GoogleAuthProvider, getAuth } from 'firebase/auth'
 
-console.log(import.meta.env.VITE_AUTO_DOMAINS)
-
 const {
 	VITE_API_KEY,
 	VITE_AUTO_DOMAINS,

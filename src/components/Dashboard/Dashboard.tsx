@@ -1,7 +1,8 @@
 import styles from './Dashboard.module.scss'
 
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
+import { logout } from '../../store/slices/authSlice'
 import { RootState } from '../../store/store'
 
 const Dashboard = () => {
@@ -14,6 +15,12 @@ const Dashboard = () => {
 		return <Navigate to='/' />
 	}
 
+	const dispatch = useDispatch()
+
+	const handleLogOut = () => {
+		dispatch(logout())
+	}
+
 	return (
 		<div className={styles.Dashboard}>
 			Dashboard
@@ -24,7 +31,7 @@ const Dashboard = () => {
 			) : (
 				<div>Пользователь не аутентифицирован</div>
 			)}
-			<button>logout</button>
+			<button onClick={handleLogOut}>logout</button>
 		</div>
 	)
 }

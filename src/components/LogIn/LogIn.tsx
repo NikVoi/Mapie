@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import handleLogInWithGoogle from '../../utils/authUtils'
+import useLogInWithGoogle from '../../hook/auth/useLogInWithGoogle'
 
 import useSingInWithEmail from '../../hook/auth/useLogInWithEmail'
 import AuthForm from '../AuthForm/AuthForm'
@@ -18,6 +18,7 @@ export default function LogIn() {
 	const [isActive, setIsActive] = useState<boolean>(false)
 
 	const { SingInWithEmail } = useSingInWithEmail()
+	const { handleLogInWithGoogle } = useLogInWithGoogle()
 
 	const handleInputEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setUserEmail(e.target.value)

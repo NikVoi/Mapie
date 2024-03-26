@@ -20,11 +20,15 @@ const authSlice = createSlice({
 			state.isAuthenticated = true
 			state.token = action.payload.token
 			state.userEmail = action.payload.userEmail
+			document.cookie = `token=${action.payload.token}; path=/;`
+			localStorage.setItem('userEmail', action.payload.userEmail)
 		},
 		logout(state) {
 			state.isAuthenticated = false
 			state.token = null
 			state.userEmail = null
+			document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+			localStorage.removeItem('userEmail')
 		},
 	},
 })

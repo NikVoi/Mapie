@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import handleLogInWithGoogle from '../../utils/authUtils'
+import useLogInWithGoogle from '../../hook/auth/useLogInWithGoogle'
 
 import CustomAlert from '../CustomAlert/CustomAlert'
 import Button from '../UI/Button/Button'
@@ -19,6 +19,7 @@ const SingUp = () => {
 	const [isActive, setIsActive] = useState<boolean>(false)
 
 	const { signUpWithEmailAndPassword } = useSignUpWithEmailAndPassword()
+	const { handleLogInWithGoogle } = useLogInWithGoogle()
 
 	const handleInputEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setUserEmail(e.target.value)
