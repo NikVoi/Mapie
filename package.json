@@ -15,6 +15,7 @@
 		"axios": "^1.6.8",
 		"classnames": "^2.5.1",
 		"firebase": "^10.9.0",
+		"framer-motion": "^11.0.22",
 		"init": "^0.1.2",
 		"lucide-react": "^0.361.0",
 		"postcss": "^8.4.38",

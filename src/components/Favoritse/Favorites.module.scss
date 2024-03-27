@@ -1,0 +1,44 @@
+.favorites {
+	@apply absolute top-0 -left-36 flex items-center w-36 h-full duration-200;
+	transition: left 0.3s ease;
+
+	&.open {
+		@apply left-0;
+	}
+}
+
+.search {
+	@apply mb-6;
+}
+
+.main::-webkit-scrollbar {
+	width: 0;
+}
+
+.main {
+	@apply h-full bg-white overflow-y-scroll  p-6;
+}
+
+.title {
+	@apply flex justify-start items-center text-3xl font-bold mb-5;
+
+	& button {
+		@apply w-10 p-0 bg-white border-none text-black mr-2;
+
+		& svg {
+			@apply size-10;
+		}
+
+		& span {
+			@apply flex-1;
+		}
+	}
+}
+
+.wrapper {
+	@apply flex flex-col;
+}
+
+.close {
+	@apply bg-white w-20 h-20 rounded-r-2xl;
+}

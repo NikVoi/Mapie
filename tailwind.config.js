@@ -5,6 +5,7 @@ export default {
 		extend: {
 			spacing: {
 				36: '36rem',
+				24: '30rem',
 			},
 
 			animation: {

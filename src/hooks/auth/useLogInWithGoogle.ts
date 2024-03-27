@@ -25,11 +25,12 @@ const useLogInWithGoogle = () => {
 			)
 			const token = user.refreshToken
 			const userEmail = user.email ?? ''
+			const photoURL = user.photoURL ?? ''
 
 			// Почему оно не воспренимаеться как string
 
-			dispatch(login({ token, userEmail }))
-			navigate('/dashboard')
+			dispatch(login({ token, userEmail, photoURL }))
+			// navigate('/dashboard')
 		} catch (error: any) {
 			const newLocal = 'Ошибка аутентификации через Google:'
 			console.error(newLocal, error)

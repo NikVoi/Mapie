@@ -39,8 +39,9 @@ const useSingInWithEmail = () => {
 			console.log('Пользователь успешно авторизован:', user.user)
 
 			const token = user.user.refreshToken
+			const photoURL = null
 
-			dispatch(login({ token, userEmail }))
+			dispatch(login({ token, userEmail, photoURL }))
 
 			navigate('/dashboard')
 		} catch (error: any) {

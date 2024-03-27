@@ -22,7 +22,7 @@ const CustomAlert: FC<IAlert> = ({ type, text, isActive, setIsActive }) => {
 	}, [isActive, setIsActive])
 
 	return (
-		<div className={classNames(styles.modal, isActive && styles.active)}>
+		<section className={classNames(styles.modal, isActive && styles.active)}>
 			<div className={styles.content}>
 				<i className={styles.info}>{getIcon(type)}</i>
 
@@ -38,7 +38,7 @@ const CustomAlert: FC<IAlert> = ({ type, text, isActive, setIsActive }) => {
 			<div
 				className={classNames(styles.progress, isActive && styles.active)}
 			></div>
-		</div>
+		</section>
 	)
 }
 

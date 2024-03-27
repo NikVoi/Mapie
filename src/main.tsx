@@ -3,12 +3,14 @@ import * as ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import Dashboard from './components/Dashboard/Dashboard.tsx'
-import Error from './components/Error/Error.tsx'
-import LogIn from './components/LogIn/LogIn.tsx'
-import SingUp from './components/SingUp/SingUp.tsx'
-import './global.css'
-import { store } from './store/store'
+import Dashboard from '@components/Dashboard/Dashboard.tsx'
+import Error from '@components/Error/Error.tsx'
+import LogIn from '@components/LogIn/LogIn.tsx'
+import SingUp from '@components/SingUp/SingUp.tsx'
+
+import { store } from '@store/store'
+
+import './global.scss'
 
 const router = createBrowserRouter([
 	{

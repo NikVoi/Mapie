@@ -1,0 +1,27 @@
+.favorite {
+	@apply w-full border border-solid border-gray-400 rounded-2xl p-6;
+}
+
+.img {
+	@apply w-full h-64 bg-slate-600 rounded-2xl overflow-hidden mb-4;
+}
+
+.name {
+	@apply text-3xl font-semibold mb-4;
+}
+
+.description {
+	@apply text-lg mb-4;
+}
+
+.wrapper {
+	@apply flex justify-between items-center;
+
+	& button {
+		@apply text-2xl w-52 first:bg-white first:text-gray-600 first:hover:bg-red-600 first:hover:text-white last:hover:bg-blue-400;
+
+		& svg {
+			@apply size-8 mr-2;
+		}
+	}
+}

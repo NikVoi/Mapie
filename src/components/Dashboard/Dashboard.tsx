@@ -1,38 +1,60 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 
 import styles from './Dashboard.module.scss'
 
-import { logout } from '@/store/slices/authSlice'
 import { RootState } from '@/store/store'
+import { useState } from 'react'
+import Favorites from '../Favoritse/Favorites'
+import Profile from '../Profile/Profile'
+import Search from '../Search/Search'
+import SideBar from '../SideBar/SideBar'
 
 const Dashboard = () => {
+	const [isProfileOpen, setIsProfileOpen] = useState(false)
+	const [isFavoritesOpen, setIsFavoritesOpen] = useState(false)
+	const [isSearchOpen, setIsSearchOpen] = useState(false)
+
 	const isAuthenticated = useSelector(
 		(state: RootState) => state.auth.isAuthenticated
 	)
-	const userEmail = useSelector((state: RootState) => state.auth.userEmail)
+
+	const toggleProfile = () => {
+		setIsProfileOpen(prevState => !prevState)
+	}
+
+	const toggleFavorites = () => {
+		setIsFavoritesOpen(prevState => !prevState)
+		setIsSearchOpen(false)
+	}
+
+	const toggleSearch = () => {
+		setIsSearchOpen(prevState => !prevState)
+		setIsFavoritesOpen(false)
+	}
 
 	if (!isAuthenticated) {
 		return <Navigate to='/' />
 	}
 
-	const dispatch = useDispatch()
-
-	const handleLogOut = () => {
-		dispatch(logout())
-	}
-
 	return (
 		<div className={styles.Dashboard}>
-			Dashboard
-			<div> hello {userEmail}</div>
-			<div> </div>
-			{isAuthenticated ? (
-				<div>Пользователь аутентифицирован</div>
-			) : (
-				<div>Пользователь не аутентифицирован</div>
-			)}
-			<button onClick={handleLogOut}>logout</button>
+			<SideBar
+				handleProfileClick={toggleProfile}
+				handleFavoritesClick={toggleFavorites}
+				handleSearchClick={toggleSearch}
+			/>
+
+			<div className={styles.map}>
+				<Profile isFavoritesOpen={isProfileOpen} />
+
+				<Favorites
+					isFavoritesOpen={isFavoritesOpen}
+					handleFavoritesClick={toggleFavorites}
+				/>
+
+				<Search isSearchOpen={isSearchOpen} handleSearchClick={toggleSearch} />
+			</div>
 		</div>
 	)
 }

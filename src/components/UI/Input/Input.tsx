@@ -2,7 +2,7 @@ import { ChangeEvent, FC } from 'react'
 import styles from './Input.module.scss'
 
 interface IInput {
-	label: string
+	label?: string
 	type?: string
 	placeholder: string
 	onChange?: (event: ChangeEvent<HTMLInputElement>) => void

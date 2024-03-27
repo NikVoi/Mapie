@@ -1,16 +1,18 @@
-import { FC, MouseEventHandler } from 'react'
+import { FC, MouseEventHandler, ReactNode } from 'react'
 import styles from './Button.module.scss'
 
 interface IButton {
-	text: string
+	text?: string
 	img?: string
-	onClick: MouseEventHandler<HTMLButtonElement>
+	svg?: ReactNode
+	onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
-const Button: FC<IButton> = ({ onClick, text, img }) => {
+const Button: FC<IButton> = ({ onClick, text, img, svg }) => {
 	return (
 		<button className={styles.button} onClick={onClick}>
 			{img && <img src={img} className={styles.ico}></img>}
+			{svg}
 			{text}
 		</button>
 	)

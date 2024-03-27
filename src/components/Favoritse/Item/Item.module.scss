@@ -1,0 +1,23 @@
+.item {
+	@apply w-full border-2 border-solid border-gray-400 rounded-xl p-5 mb-8 last:mb-0;
+}
+
+.wrapper {
+	@apply flex justify-between mb-5 last:mb-0;
+
+	& .img {
+		@apply w-2/5 h-32 bg-slate-800 rounded-xl;
+	}
+
+	.name {
+		@apply w-2/4 flex justify-center items-center text-2xl font-semibold;
+	}
+}
+
+.description {
+	@apply text-lg h-20 overflow-y-auto text-ellipsis mb-5;
+}
+
+.description::-webkit-scrollbar {
+	width: 0;
+}
