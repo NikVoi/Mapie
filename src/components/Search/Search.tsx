@@ -1,9 +1,9 @@
 import classNames from 'classnames'
 import { ChevronLeft } from 'lucide-react'
+import { data } from '../../../public/ico/search.data'
 import Input from '../UI/Input/Input'
 import Item from './Item/Item'
 import styles from './Search.module.scss'
-import { data } from './search.data'
 
 interface Props {
 	isSearchOpen: boolean
