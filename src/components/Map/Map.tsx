@@ -18,13 +18,19 @@ const defaultOptions = {
 	clickableIcons: true,
 	scrollWheel: true,
 	disableDoubleClickZoom: true,
-	styles: defaultTheme,
+	styles: defaultTheme.map(style => ({
+		featureType: style.featureType,
+		elementType: style.elementType,
+		stylers: style.stylers || [],
+	})),
 }
+
+const { VITE_GOOGLE_KEY } = import.meta.env
 
 const Map = () => {
 	const { isLoaded, loadError } = useJsApiLoader({
 		id: 'google-map-script',
-		googleMapsApiKey: 'AIzaSyAmbnbX7QWlEA41SlYMxemJCSzx7MA_7-I',
+		googleMapsApiKey: VITE_GOOGLE_KEY,
 	})
 
 	const [map, setMap] = useState(null)
