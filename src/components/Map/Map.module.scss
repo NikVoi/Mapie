@@ -1,0 +1,9 @@
+.wrapper {
+	& button {
+		@apply absolute top-0 left-0 z-30 size-20;
+
+		& svg {
+			@apply size-12;
+		}
+	}
+}

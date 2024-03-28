@@ -3,6 +3,7 @@ import { ChevronLeft } from 'lucide-react'
 import Input from '../UI/Input/Input'
 import Item from './Item/Item'
 import styles from './Search.module.scss'
+import { data } from './search.data'
 
 interface Props {
 	isSearchOpen: boolean
@@ -24,12 +25,9 @@ const Search = ({ isSearchOpen, handleSearchClick }: Props) => {
 				<div className={styles.title}>Искать:</div>
 
 				<div className={styles.wrapper}>
-					<Item />
-					<Item />
-					<Item />
-					<Item />
-					<Item />
-					<Item />
+					{data.map(item => (
+						<Item id={item.id} name={item.name} img={item.img} />
+					))}
 				</div>
 
 				<div className={styles.title}>В радиусе</div>

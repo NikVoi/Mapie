@@ -1,6 +1,11 @@
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
+import styles from './Map.module.scss'
+
+import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api'
 import { useCallback, useEffect, useState } from 'react'
 
+import { LocateFixed } from 'lucide-react'
+import userMarker from '../../../public/userMarker.png'
+import MainButton from '../UI/MainButton/MainButton'
 import { defaultTheme } from './defaultTheme'
 
 const containerStyle = {
@@ -34,6 +39,7 @@ const Map = () => {
 	})
 
 	const [map, setMap] = useState(null)
+	const [userPosition, setUserPosition] = useState(null)
 
 	const func = () => {
 		map
@@ -54,16 +60,40 @@ const Map = () => {
 	const onUnmount = useCallback(function callback() {
 		setMap(null)
 	}, [])
+
+	const getUserPosition = () => {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(
+				position => {
+					setUserPosition({
+						lat: position.coords.latitude,
+						lng: position.coords.longitude,
+					})
+				},
+				error => {
+					console.error('Error getting user position:', error)
+				}
+			)
+		} else {
+			console.error('Geolocation is not supported by this browser.')
+		}
+	}
+
 	return isLoaded ? (
 		<GoogleMap
 			mapContainerStyle={containerStyle}
 			zoom={14}
-			center={{ lat: 53.89166, lng: 30.3418 }}
+			center={userPosition || { lat: 53.89166, lng: 30.3418 }}
 			onLoad={onLoad}
 			onUnmount={onUnmount}
 			options={defaultOptions}
 		>
-			<></>
+			<div className={styles.wrapper}>
+				<MainButton svg={<LocateFixed />} onClick={getUserPosition} />
+			</div>
+			{userPosition && (
+				<Marker position={userPosition} icon={{ url: userMarker }} />
+			)}
 		</GoogleMap>
 	) : null
 }

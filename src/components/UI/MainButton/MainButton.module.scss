@@ -1,5 +1,5 @@
 .button {
-	@apply flex justify-center text-3xl w-full text-white py-4 rounded-xl font-semibold border-2 border-solid border-gray-400 bg-blue-500
+	@apply flex justify-center items-center text-3xl w-full text-white py-4 rounded-xl font-semibold border-2 border-solid border-gray-400 bg-blue-500
 	hover:duration-300;
 
 	& svg {
