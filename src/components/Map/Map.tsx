@@ -32,6 +32,11 @@ const defaultOptions = {
 
 const { VITE_GOOGLE_KEY } = import.meta.env
 
+interface UserPosition {
+	lat: number
+	lng: number
+}
+
 const Map = () => {
 	const { isLoaded, loadError } = useJsApiLoader({
 		id: 'google-map-script',
@@ -39,7 +44,7 @@ const Map = () => {
 	})
 
 	const [map, setMap] = useState(null)
-	const [userPosition, setUserPosition] = useState(null)
+	const [userPosition, setUserPosition] = useState<UserPosition | null>(null)
 
 	const func = () => {
 		map
