@@ -1,9 +1,8 @@
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { login } from '@store/slices/authSlice'
-import { RootState } from '@store/store'
 import { auth } from '../../firebase'
 
 interface Props {
@@ -16,10 +15,6 @@ interface Props {
 
 const useSingInWithEmail = () => {
 	const dispatch = useDispatch()
-	const isAuthenticated = useSelector(
-		(state: RootState) => state.auth.isAuthenticated
-	)
-
 	const navigate = useNavigate()
 
 	const SingInWithEmail = async ({

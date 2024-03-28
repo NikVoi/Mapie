@@ -6,6 +6,7 @@ import styles from './Dashboard.module.scss'
 import { RootState } from '@/store/store'
 import { useState } from 'react'
 import Favorites from '../Favoritse/Favorites'
+import Map from '../Map/Map'
 import Profile from '../Profile/Profile'
 import Search from '../Search/Search'
 import SideBar from '../SideBar/SideBar'
@@ -54,6 +55,8 @@ const Dashboard = () => {
 				/>
 
 				<Search isSearchOpen={isSearchOpen} handleSearchClick={toggleSearch} />
+
+				<Map />
 			</div>
 		</div>
 	)

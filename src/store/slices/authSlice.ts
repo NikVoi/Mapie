@@ -1,12 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-interface IAuth {
+export interface IAuth {
 	isAuthenticated: boolean
 	token: string | null
 	userEmail: string | null
 	photoURL: string | null
 }
-
 const initialState: IAuth = {
 	isAuthenticated: false,
 	token: null,

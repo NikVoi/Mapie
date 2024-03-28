@@ -1,17 +1,12 @@
 import { signInWithPopup } from 'firebase/auth'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { auth, googleProvider } from '@/firebase'
 import { login } from '@store/slices/authSlice'
-import { RootState } from '@store/store'
 
 const useLogInWithGoogle = () => {
 	const dispatch = useDispatch()
-
-	const isAuthenticated = useSelector(
-		(state: RootState) => state.auth.isAuthenticated
-	)
 
 	const navigate = useNavigate()
 
@@ -30,7 +25,7 @@ const useLogInWithGoogle = () => {
 			// Почему оно не воспренимаеться как string
 
 			dispatch(login({ token, userEmail, photoURL }))
-			// navigate('/dashboard')
+			navigate('/dashboard')
 		} catch (error: any) {
 			const newLocal = 'Ошибка аутентификации через Google:'
 			console.error(newLocal, error)
