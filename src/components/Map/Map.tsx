@@ -35,8 +35,6 @@ const Map = () => {
 
 	const [map, setMap] = useState(null)
 
-	console.log(map)
-
 	useEffect(() => {
 		if (loadError) {
 			console.error('Error loading Google Maps API:', loadError)

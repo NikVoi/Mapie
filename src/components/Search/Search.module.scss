@@ -1,5 +1,5 @@
 .search {
-	@apply absolute top-0 -left-36 flex items-center w-36 h-full duration-200;
+	@apply absolute z-10 top-0 -left-36 flex items-center w-36 h-full duration-200;
 	transition: left 0.3s ease;
 
 	&.open {

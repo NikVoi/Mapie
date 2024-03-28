@@ -20,7 +20,6 @@ const Profile = ({ isFavoritesOpen }: Props) => {
 
 	const userEmail = localStorage.getItem('userEmail')
 	const photoURL = localStorage.getItem('photoURL')
-	console.log(photoURL)
 
 	return (
 		<section
