@@ -25,7 +25,7 @@ const useLogInWithGoogle = () => {
 			// Почему оно не воспренимаеться как string
 
 			dispatch(login({ token, userEmail, photoURL }))
-			// navigate('/dashboard')
+			navigate('/dashboard')
 		} catch (error: any) {
 			const newLocal = 'Ошибка аутентификации через Google:'
 			console.error(newLocal, error)
