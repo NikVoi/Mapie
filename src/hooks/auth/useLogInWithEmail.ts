@@ -2,52 +2,42 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
+import { auth } from '@/firebase'
+import { IProps } from '@hooks/auth/auth.type'
 import { login } from '@store/slices/authSlice'
-import { auth } from '../../firebase'
-
-interface Props {
-	userEmail: string
-	userPassword: string
-	setTypeAlert: React.Dispatch<React.SetStateAction<string>>
-	setMessage: React.Dispatch<React.SetStateAction<string>>
-	setIsActive: React.Dispatch<React.SetStateAction<boolean>>
-}
 
 const useSingInWithEmail = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
-	const SingInWithEmail = async ({
-		userEmail,
-		userPassword,
-		setIsActive,
-		setMessage,
-		setTypeAlert,
-	}: Props) => {
+	const handleSingInWithEmail = async ({ userData, setUserData }: IProps) => {
 		try {
 			const user = await signInWithEmailAndPassword(
 				auth,
-				userEmail,
-				userPassword
+				userData.email,
+				userData.password
 			)
 
 			console.log('Пользователь успешно авторизован:', user.user)
 
 			const token = user.user.refreshToken
 			const photoURL = null
+			const userEmail = userData.email
 
 			dispatch(login({ token, userEmail, photoURL }))
 
 			navigate('/dashboard')
 		} catch (error: any) {
 			console.error('Ошибка авторизации пользователя:', error)
-			setMessage(error.message)
-			setTypeAlert('Error')
-			setIsActive(true)
+			setUserData({
+				message: error.message,
+				typeAlert: 'Error',
+				isActive: true,
+			})
 		}
 	}
 
-	return { SingInWithEmail }
+	return { handleSingInWithEmail }
 }
 
 export default useSingInWithEmail

@@ -1,53 +1,43 @@
-import { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Link, Navigate } from 'react-router-dom'
+import { useCallback } from 'react'
+import { Link } from 'react-router-dom'
 
+import useAuthenticationRedirect from '@/hooks/auth/useAuthRedirect'
 import useSingInWithEmail from '@/hooks/auth/useLogInWithEmail'
 import useLogInWithGoogle from '@/hooks/auth/useLogInWithGoogle'
+import useUserData from '@hooks/auth/useUserData'
 
 import AuthForm from '@/components/AuthForm/AuthForm'
 import CustomAlert from '@/components/CustomAlert/CustomAlert'
 import Button from '@/components/UI/Button/Button'
 import ButtonGoogle from '@/components/UI/ButtonGoogle/ButtonGoogle'
 
-import { RootState } from '@/store/store'
-
 import styles from './LogIn.module.scss'
 
 export default function LogIn() {
-	const [userEmail, setUserEmail] = useState<string>('')
-	const [userPassword, setUserPassword] = useState<string>('')
-	const [message, setMessage] = useState<string>('')
-	const [typeAlert, setTypeAlert] = useState<string>('')
-	const [isActive, setIsActive] = useState<boolean>(false)
-
-	const { SingInWithEmail } = useSingInWithEmail()
+	const [userData, setUserData] = useUserData()
+	const { handleSingInWithEmail } = useSingInWithEmail()
 	const { handleLogInWithGoogle } = useLogInWithGoogle()
+	const redirectComponent = useAuthenticationRedirect({
+		authenticatedRedirectPath: '/dashboard',
+	})
 
-	const isAuthenticated = useSelector(
-		(state: RootState) => state.auth.isAuthenticated
+	if (redirectComponent) {
+		return redirectComponent
+	}
+
+	const handleInputEmail = useCallback(
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			setUserData({ email: e.target.value })
+		},
+		[userData, setUserData]
 	)
 
-	if (isAuthenticated) {
-		return <Navigate to='/dashboard' />
-	}
-
-	const handleInputEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setUserEmail(e.target.value)
-	}
-	const handleInputPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setUserPassword(e.target.value)
-	}
-
-	const handleSubmit = () => {
-		SingInWithEmail({
-			userEmail,
-			userPassword,
-			setIsActive,
-			setMessage,
-			setTypeAlert,
-		})
-	}
+	const handleInputPassword = useCallback(
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			setUserData({ password: e.target.value })
+		},
+		[userData, setUserData]
+	)
 
 	return (
 		<section className={styles.login}>
@@ -64,7 +54,15 @@ export default function LogIn() {
 					handleInputPassword={handleInputPassword}
 				/>
 
-				<Button text='Войти' onClick={handleSubmit} />
+				<Button
+					text='Войти'
+					onClick={() => {
+						handleSingInWithEmail({
+							userData,
+							setUserData,
+						})
+					}}
+				/>
 
 				<span className={styles.footer}>
 					<span>Не зарегистрированны?</span>
@@ -74,12 +72,7 @@ export default function LogIn() {
 				</span>
 			</div>
 
-			<CustomAlert
-				type={typeAlert}
-				text={message}
-				isActive={isActive}
-				setIsActive={setIsActive}
-			/>
+			<CustomAlert userData={userData} setUserData={setUserData} />
 		</section>
 	)
 }

@@ -25,6 +25,9 @@ export const getMessage = (text: string): string => {
 			return 'Неверный адрес электронной почты'
 		case 'Firebase: Error (auth/missing-password).':
 			return 'Пропущенный пароль'
+		case 'Firebase: Error (auth/invalid-credential).':
+			return 'Недопустимые учетные данные'
+
 		case 'Success':
 			return 'Вы успешно зарегистрировались'
 		default:

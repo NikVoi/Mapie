@@ -2,33 +2,35 @@ import classNames from 'classnames'
 import { X } from 'lucide-react'
 import { FC, useEffect } from 'react'
 
+import { IProps } from '@/hooks/auth/auth.type'
 import styles from './CustomAlert.module.scss'
 import { getIcon, getMessage } from './alertUtils'
-import { IAlert } from './type'
 
-const CustomAlert: FC<IAlert> = ({ type, text, isActive, setIsActive }) => {
+const CustomAlert: FC<IProps> = ({ userData, setUserData }) => {
 	const handleClose = () => {
-		setIsActive(false)
+		setUserData({ isActive: false })
 	}
 
 	useEffect(() => {
-		if (isActive) {
+		if (userData.isActive) {
 			const timer = setTimeout(() => {
-				setIsActive(false)
+				setUserData({ isActive: false })
 			}, 5000)
 
 			return () => clearTimeout(timer)
 		}
-	}, [isActive, setIsActive])
+	}, [userData.isActive])
 
 	return (
-		<section className={classNames(styles.modal, isActive && styles.active)}>
+		<section
+			className={classNames(styles.modal, userData.isActive && styles.active)}
+		>
 			<div className={styles.content}>
-				<i className={styles.info}>{getIcon(type)}</i>
+				<i className={styles.info}>{getIcon(userData.typeAlert)}</i>
 
 				<div className={styles.message}>
-					<span>{type}</span>
-					<span>{getMessage(text)}</span>
+					<span>{userData.typeAlert}</span>
+					<span>{getMessage(userData.message)}</span>
 				</div>
 			</div>
 			<i className={styles.close} onClick={handleClose}>
@@ -36,7 +38,10 @@ const CustomAlert: FC<IAlert> = ({ type, text, isActive, setIsActive }) => {
 			</i>
 
 			<div
-				className={classNames(styles.progress, isActive && styles.active)}
+				className={classNames(
+					styles.progress,
+					userData.isActive && styles.active
+				)}
 			></div>
 		</section>
 	)
