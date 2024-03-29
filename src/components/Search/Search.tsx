@@ -1,9 +1,9 @@
 import classNames from 'classnames'
 import { ChevronLeft } from 'lucide-react'
-import { data } from '../../../public/ico/search.data'
 import Input from '../UI/Input/Input'
 import Item from './Item/Item'
 import styles from './Search.module.scss'
+import { data } from './search.data'
 
 interface Props {
 	isSearchOpen: boolean
@@ -26,7 +26,7 @@ const Search = ({ isSearchOpen, handleSearchClick }: Props) => {
 
 				<div className={styles.wrapper}>
 					{data.map(item => (
-						<Item id={item.id} name={item.name} img={item.img} />
+						<Item key={item.id} name={item.name} img={item.img} />
 					))}
 				</div>
 

@@ -1,14 +1,13 @@
 import styles from '../Search.module.scss'
 
 interface Props {
-	id: number
 	name: string
 	img: string
 }
 
-const Item = ({ id, name, img }: Props) => {
+const Item = ({ name, img }: Props) => {
 	return (
-		<div className={styles.item} key={id}>
+		<div className={styles.item}>
 			<div className={styles.ico}>
 				<img src={img} alt='ico' />
 			</div>

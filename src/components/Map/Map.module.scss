@@ -1,9 +1,9 @@
 .wrapper {
 	& button {
-		@apply absolute top-0 left-0 z-30 size-20;
+		@apply absolute bottom-9 right-28 z-30 size-16 bg-white;
 
 		& svg {
-			@apply size-12;
+			@apply size-10 text-gray-600 hover:text-gray-400 duration-200;
 		}
 	}
 }
