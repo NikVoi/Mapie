@@ -1,13 +1,7 @@
-import {
-	Circle,
-	GoogleMap,
-	Marker,
-	useJsApiLoader,
-} from '@react-google-maps/api'
+import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api'
 
 import { LocateFixed } from 'lucide-react'
 
-import userMarker from '../../../public/userMarker.png'
 import MainButton from '../UI/MainButton/MainButton'
 
 import { defaultOptions } from './defaultOptions'
@@ -18,12 +12,21 @@ import { RootState } from '@/store/store'
 import { useSelector } from 'react-redux'
 import styles from './Map.module.scss'
 
+import useMapFeatures from '@/hooks/dashboard/useMapFeatures'
+import userMarkerUrl from '../../../public/userMarker.png'
+
 const icons: Record<string, string> = {
-	food: '/public/ico/food.png',
-	university: '/public/ico/factory.png',
-	store: '/public/ico/solar_shop.png',
-	finance: '/public/ico/bank.png',
-	point_of_interest: '/public/ico/culture.png',
+	park: './ico/nature.png',
+	church: './ico/religion.png',
+	amusement_park: './ico/ferris.png',
+	food: './ico/food.png',
+	university: './ico/culture.png',
+	furniture_store: './ico/solar_shop.png',
+	store: './ico/solar_shop.png',
+	finance: './ico/bank.png',
+	establishment: './ico/culture.png',
+	night_club: './ico/18+.png',
+	train_station: './ico/factory.png',
 }
 
 const { VITE_GOOGLE_KEY } = import.meta.env
@@ -34,62 +37,45 @@ const Map = () => {
 		googleMapsApiKey: VITE_GOOGLE_KEY,
 	})
 
-	const userPosition = useUserPosition()
-	const places = usePlaces()
-
 	const radius = useSelector(
 		(state: RootState) => state.radiusSlice.radiusSlice
+	)
+	const { userPosition, getUserPosition } = useUserPosition()
+	const places = usePlaces()
+	const { circle, userMarker, map, handleMapLoad } = useMapFeatures(
+		isLoaded,
+		userPosition,
+		radius,
+		places,
+		userMarkerUrl
 	)
 
 	return isLoaded ? (
 		<GoogleMap
+			onLoad={handleMapLoad}
 			mapContainerStyle={{ width: '100%', height: '100%' }}
 			zoom={14}
 			center={userPosition || { lat: 53.89166, lng: 30.3418 }}
 			options={defaultOptions}
 		>
-			{userPosition && (
-				<>
-					<div className={styles.wrapper}>
-						<MainButton svg={<LocateFixed />} />
-					</div>
-
+			<div className={styles.wrapper}>
+				<MainButton svg={<LocateFixed />} onClick={getUserPosition} />
+			</div>
+			{userPosition &&
+				places.map((place: any) => (
 					<Marker
-						position={userPosition}
+						key={place.name}
+						position={{
+							lat: place.geometry.location.lat,
+							lng: place.geometry.location.lng,
+						}}
+						title={place.name}
 						icon={{
-							url: userMarker,
-							size: new window.google.maps.Size(30, 25),
-						}}
-						options={{ optimized: false }}
-					/>
-					<Circle
-						center={userPosition}
-						radius={radius}
-						options={{
-							strokeColor: '#5E7BC7',
-							strokeOpacity: 1,
-							strokeWeight: 2,
-							fillColor: '#5E7BC7',
-							fillOpacity: 0.3,
+							url: icons[place.types.find((type: string) => icons[type])],
+							scaledSize: new window.google.maps.Size(30, 30),
 						}}
 					/>
-
-					{places.map((place: any) => (
-						<Marker
-							key={place.name}
-							position={{
-								lat: place.geometry.location.lat,
-								lng: place.geometry.location.lng,
-							}}
-							title={place.name}
-							icon={{
-								url: icons[place.types.find((type: string) => icons[type])],
-								scaledSize: new window.google.maps.Size(40, 40),
-							}}
-						/>
-					))}
-				</>
-			)}
+				))}
 		</GoogleMap>
 	) : null
 }

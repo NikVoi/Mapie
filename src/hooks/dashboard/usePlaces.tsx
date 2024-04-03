@@ -25,7 +25,6 @@ export const usePlaces = () => {
 	)
 
 	useEffect(() => {
-		console.log(radius)
 		const fetchData = async () => {
 			try {
 				const response = await axios.get('http://localhost:3000/places', {

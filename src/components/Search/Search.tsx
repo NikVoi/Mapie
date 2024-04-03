@@ -25,14 +25,12 @@ const Search = ({ isSearchOpen, handleSearchClick }: Props) => {
 		const inputValue = event.target.value
 		const newRadius = parseFloat(inputValue)
 		if (inputValue === '') {
-			// Если строка ввода пуста
-			dispatch(setRadius(0)) // Установить радиус в 0
-			setInputValue('0') // Установить значение ввода в '0'
+			dispatch(setRadius(0))
+			setInputValue('0')
 		} else if (!isNaN(newRadius)) {
-			// Если значение удалось преобразовать в число
-			dispatch(setRadius(newRadius * 1000)) // Установить новое значение радиуса
+			dispatch(setRadius(newRadius * 1000))
 		}
-		setInputValue(inputValue) // Обновить значение ввода
+		setInputValue(inputValue)
 	}
 
 	return (
