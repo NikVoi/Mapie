@@ -1,36 +1,38 @@
-import { setRadius } from '@/store/slices/radiusSlice'
-import { RootState } from '@/store/store'
+import { Autocomplete } from '@react-google-maps/api'
 import classNames from 'classnames'
 import { ChevronLeft } from 'lucide-react'
-import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
+import useAutocomplete from '@/hooks/dashboard/Search/useAutocomplete'
+import useItemSelection from '@/hooks/dashboard/Search/useItemSelection'
+import useRadiusInput from '@/hooks/dashboard/Search/useRadiusInput'
+
+import { toggleSearch } from '@/store/slices/dashboardSlice'
+import { selectPlace } from '@/store/slices/placeSlice'
+import { RootState } from '@/store/store'
+
 import Input from '../UI/Input/Input'
 import Item from './Item/Item'
 import styles from './Search.module.scss'
 import { data } from './search.data'
 
-interface Props {
-	isSearchOpen: boolean
-	handleSearchClick: () => void
-}
-
-const Search = ({ isSearchOpen, handleSearchClick }: Props) => {
+const Search = () => {
 	const dispatch = useDispatch()
-	const radius = useSelector(
-		(state: RootState) => state.radiusSlice.radiusSlice
-	)
-	const [inputValue, setInputValue] = useState((radius / 1000).toString())
 
-	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const inputValue = event.target.value
-		const newRadius = parseFloat(inputValue)
-		if (inputValue === '') {
-			dispatch(setRadius(0))
-			setInputValue('0')
-		} else if (!isNaN(newRadius)) {
-			dispatch(setRadius(newRadius * 1000))
+	const { isSearchOpen } = useSelector((state: RootState) => state.dashboard)
+	const handleToggleSearch = () => {
+		dispatch(toggleSearch())
+	}
+	const { autocomplete, onLoad } = useAutocomplete()
+	const { handleItemClick } = useItemSelection()
+	const { inputValue, handleChange } = useRadiusInput()
+
+	const handlePlaceSelect = () => {
+		if (autocomplete !== null) {
+			const place = autocomplete.getPlace()
+			console.log('Выбранное место:', place)
+			dispatch(selectPlace(place))
 		}
-		setInputValue(inputValue)
 	}
 
 	return (
@@ -41,14 +43,21 @@ const Search = ({ isSearchOpen, handleSearchClick }: Props) => {
 		>
 			<div className={styles.main}>
 				<div className={styles.input}>
-					<Input placeholder='Место, адрес..' />
+					<Autocomplete onLoad={onLoad} onPlaceChanged={handlePlaceSelect}>
+						<Input placeholder='Место, адрес..' />
+					</Autocomplete>
 				</div>
 
 				<div className={styles.title}>Искать:</div>
 
 				<div className={styles.wrapper}>
 					{data.map(item => (
-						<Item key={item.id} name={item.name} img={item.img} />
+						<Item
+							key={item.id}
+							name={item.name}
+							img={item.img}
+							onClick={() => handleItemClick(item)}
+						/>
 					))}
 				</div>
 
@@ -59,7 +68,7 @@ const Search = ({ isSearchOpen, handleSearchClick }: Props) => {
 				</div>
 			</div>
 
-			<button className={styles.close} onClick={handleSearchClick}>
+			<button className={styles.close} onClick={handleToggleSearch}>
 				<ChevronLeft />
 			</button>
 		</section>

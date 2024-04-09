@@ -6,11 +6,29 @@
 	@apply flex justify-between mb-5 last:mb-0;
 
 	& .img {
-		@apply w-2/5 h-32 bg-slate-800 rounded-xl;
+		@apply w-2/5 h-32 bg-slate-800 rounded-xl overflow-hidden;
+
+		& img {
+			@apply w-full h-full object-cover;
+		}
 	}
 
 	.name {
 		@apply w-2/4 flex justify-center items-center text-2xl font-semibold;
+	}
+}
+
+.buttons {
+	@apply flex justify-between mb-5 last:mb-0;
+
+	& button {
+		@apply first:bg-white size-16 border-none;
+
+		&:first-child {
+			& svg {
+				@apply size-12 fill-red-600;
+			}
+		}
 	}
 }
 

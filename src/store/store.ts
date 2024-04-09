@@ -1,11 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer, { login } from './slices/authSlice'
+import dashboardReducer from './slices/dashboardSlice'
+import favoritesReducer from './slices/favoritesSlice'
+import placeReducer from './slices/placeSlice'
 import radiusReducer from './slices/radiusSlice'
 
 export const store = configureStore({
 	reducer: {
 		auth: authReducer,
 		radiusSlice: radiusReducer,
+		favorites: favoritesReducer,
+		dashboard: dashboardReducer,
+		place: placeReducer,
 	},
 })
 

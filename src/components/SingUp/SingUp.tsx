@@ -39,6 +39,13 @@ const SingUp = () => {
 		[userData, setUserData]
 	)
 
+	const handleSignUpClick = () => {
+		signUpWithEmailAndPassword({
+			userData,
+			setUserData,
+		})
+	}
+
 	return (
 		<section className={styles.sing}>
 			<div className={styles.wrapper}>
@@ -54,15 +61,7 @@ const SingUp = () => {
 					handleInputPassword={handleInputPassword}
 				/>
 
-				<Button
-					text='Зарегистрироваться'
-					onClick={() => {
-						signUpWithEmailAndPassword({
-							userData,
-							setUserData,
-						})
-					}}
-				/>
+				<Button text='Зарегистрироваться' onClick={handleSignUpClick} />
 
 				<span className={styles.footer}>
 					<span>Уже зарегистрированны?</span>

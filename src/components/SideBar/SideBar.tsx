@@ -1,20 +1,30 @@
 import { BookHeart, CircleUserRound, Search } from 'lucide-react'
 
+import {
+	toggleFavorites,
+	toggleProfile,
+	toggleSearch,
+} from '@/store/slices/dashboardSlice'
+import { useDispatch } from 'react-redux'
 import MainButton from '../UI/MainButton/MainButton'
 import styles from './SideBar.module.scss'
 
-interface Props {
-	handleProfileClick: () => void
-	handleFavoritesClick: () => void
-	handleSearchClick: () => void
-}
-
-const SideBar = ({
-	handleProfileClick,
-	handleFavoritesClick,
-	handleSearchClick,
-}: Props) => {
+const SideBar = () => {
 	const photoURL = localStorage.getItem('photoURL')
+
+	const dispatch = useDispatch()
+
+	const handleToggleProfile = () => {
+		dispatch(toggleProfile())
+	}
+
+	const handleToggleFavorites = () => {
+		dispatch(toggleFavorites())
+	}
+
+	const handleToggleSearch = () => {
+		dispatch(toggleSearch())
+	}
 
 	return (
 		<aside className={styles.SideBar}>
@@ -23,11 +33,11 @@ const SideBar = ({
 			</div>
 
 			<div className={styles.wrapper}>
-				<MainButton onClick={handleSearchClick} svg={<Search />} />
-				<MainButton onClick={handleFavoritesClick} svg={<BookHeart />} />
+				<MainButton onClick={handleToggleSearch} svg={<Search />} />
+				<MainButton onClick={handleToggleFavorites} svg={<BookHeart />} />
 			</div>
 
-			<div className={styles.avatar} onClick={handleProfileClick}>
+			<div className={styles.avatar} onClick={handleToggleProfile}>
 				{photoURL === '' ? (
 					<div className={styles.avatar}>
 						<CircleUserRound />

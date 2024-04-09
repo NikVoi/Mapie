@@ -8,7 +8,7 @@
 }
 
 .search {
-	@apply mb-6;
+	@apply w-full mb-6;
 }
 
 .main::-webkit-scrollbar {
@@ -39,6 +39,10 @@
 	@apply flex flex-col;
 }
 
+.empty {
+	@apply mt-72  text-4xl;
+}
+
 .close {
-	@apply bg-white w-20 h-20 rounded-r-2xl;
+	@apply bg-white w-12 h-20 rounded-r-2xl;
 }

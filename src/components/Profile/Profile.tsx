@@ -1,22 +1,21 @@
 import { CircleUserRound, LogOut } from 'lucide-react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { logout } from '@/store/slices/authSlice'
 
+import { RootState } from '@/store/store'
 import classNames from 'classnames'
 import MainButton from '../UI/MainButton/MainButton'
 import styles from './Profile.module.scss'
 
-interface Props {
-	isFavoritesOpen: boolean
-}
-
-const Profile = ({ isFavoritesOpen }: Props) => {
+const Profile = () => {
 	const dispatch = useDispatch()
 
 	const handleLogOut = () => {
 		dispatch(logout())
 	}
+
+	const { isProfileOpen } = useSelector((state: RootState) => state.dashboard)
 
 	const userEmail = localStorage.getItem('userEmail')
 	const photoURL = localStorage.getItem('photoURL')
@@ -24,7 +23,7 @@ const Profile = ({ isFavoritesOpen }: Props) => {
 	return (
 		<section
 			className={classNames(styles.Profile, {
-				[styles.open]: isFavoritesOpen,
+				[styles.open]: isProfileOpen,
 			})}
 		>
 			{photoURL === '' ? (
