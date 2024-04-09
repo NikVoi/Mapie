@@ -39,6 +39,13 @@ export default function LogIn() {
 		[userData, setUserData]
 	)
 
+	const handleLogIn = () => {
+		handleSingInWithEmail({
+			userData,
+			setUserData,
+		})
+	}
+
 	return (
 		<section className={styles.login}>
 			<div className={styles.wrapper}>
@@ -54,15 +61,7 @@ export default function LogIn() {
 					handleInputPassword={handleInputPassword}
 				/>
 
-				<Button
-					text='Войти'
-					onClick={() => {
-						handleSingInWithEmail({
-							userData,
-							setUserData,
-						})
-					}}
-				/>
+				<Button text='Войти' onClick={handleLogIn} />
 
 				<span className={styles.footer}>
 					<span>Не зарегистрированны?</span>

@@ -1,62 +1,51 @@
+import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 
-import styles from './Dashboard.module.scss'
-
+import useLoader from '@/hooks/useLoader'
 import { RootState } from '@/store/store'
-import { useState } from 'react'
-import Favorites from '../Favoritse/Favorites'
+
+import Favorites from '../Favorites/Favorites'
+import Loader from '../Loader/Loader'
 import Map from '../Map/Map'
+import Place from '../Place/Place'
 import Profile from '../Profile/Profile'
 import Search from '../Search/Search'
 import SideBar from '../SideBar/SideBar'
 
+import styles from './Dashboard.module.scss'
+
 const Dashboard = () => {
-	const [isProfileOpen, setIsProfileOpen] = useState(false)
-	const [isFavoritesOpen, setIsFavoritesOpen] = useState(false)
-	const [isSearchOpen, setIsSearchOpen] = useState(false)
+	const [placeDetails, setPlaceDetails] = useState<any>(null)
 
 	const isAuthenticated = useSelector(
 		(state: RootState) => state.auth.isAuthenticated
 	)
 
-	const toggleProfile = () => {
-		setIsProfileOpen(prevState => !prevState)
-	}
-
-	const toggleFavorites = () => {
-		setIsFavoritesOpen(prevState => !prevState)
-		setIsSearchOpen(false)
-	}
-
-	const toggleSearch = () => {
-		setIsSearchOpen(prevState => !prevState)
-		setIsFavoritesOpen(false)
-	}
+	const loading = useLoader()
 
 	if (!isAuthenticated) {
 		return <Navigate to='/' />
 	}
 
+	if (loading) {
+		return <Loader />
+	}
+
 	return (
 		<div className={styles.Dashboard}>
-			<SideBar
-				handleProfileClick={toggleProfile}
-				handleFavoritesClick={toggleFavorites}
-				handleSearchClick={toggleSearch}
-			/>
+			<SideBar />
 
 			<div className={styles.map}>
-				<Profile isFavoritesOpen={isProfileOpen} />
+				<Profile />
 
-				<Favorites
-					isFavoritesOpen={isFavoritesOpen}
-					handleFavoritesClick={toggleFavorites}
-				/>
+				<Favorites setPlaceDetails={setPlaceDetails} />
 
-				<Search isSearchOpen={isSearchOpen} handleSearchClick={toggleSearch} />
+				<Place placeDetails={placeDetails} />
 
-				<Map />
+				<Search />
+
+				<Map setPlaceDetails={setPlaceDetails} />
 			</div>
 		</div>
 	)

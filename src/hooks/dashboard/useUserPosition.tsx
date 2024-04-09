@@ -1,17 +1,29 @@
 import { useEffect, useState } from 'react'
 
-export const useUserPosition = () => {
-	const [userPosition, setUserPosition] = useState<google.maps.LatLng | null>(
-		null
-	)
+interface UseUserPositionProps {
+	setMapCenter: React.Dispatch<
+		React.SetStateAction<{ lat: number; lng: number }>
+	>
+}
+
+export const useUserPosition = ({ setMapCenter }: UseUserPositionProps) => {
+	const [userPosition, setUserPosition] = useState<{
+		lat: number
+		lng: number
+	} | null>(null)
 
 	const getUserPosition = () => {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(
 				position => {
-					const { latitude, longitude } = position.coords
-					const newPosition = new google.maps.LatLng(latitude, longitude)
-					setUserPosition(newPosition)
+					setUserPosition({
+						lat: position.coords.latitude,
+						lng: position.coords.longitude,
+					})
+					setMapCenter({
+						lat: position.coords.latitude,
+						lng: position.coords.longitude,
+					})
 				},
 				error => {
 					console.error('Error getting user position:', error)
