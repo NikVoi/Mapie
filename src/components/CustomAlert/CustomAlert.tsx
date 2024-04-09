@@ -3,8 +3,9 @@ import { X } from 'lucide-react'
 import { FC, useEffect } from 'react'
 
 import { IProps } from '@/hooks/auth/auth.type'
+import { createPortal } from 'react-dom'
 import styles from './CustomAlert.module.scss'
-import { getIcon, getMessage } from './alertUtils'
+import { getIcon, getMessage } from './alert.config'
 
 const CustomAlert: FC<IProps> = ({ userData, setUserData }) => {
 	const handleClose = () => {
@@ -21,7 +22,7 @@ const CustomAlert: FC<IProps> = ({ userData, setUserData }) => {
 		}
 	}, [userData.isActive])
 
-	return (
+	return createPortal(
 		<section
 			className={classNames(styles.modal, userData.isActive && styles.active)}
 		>
@@ -43,7 +44,8 @@ const CustomAlert: FC<IProps> = ({ userData, setUserData }) => {
 					userData.isActive && styles.active
 				)}
 			></div>
-		</section>
+		</section>,
+		document.body
 	)
 }
 

@@ -1,30 +1,29 @@
+import { FC, memo } from 'react'
+
 import Input from '@/components/UI/Input/Input'
-
 import styles from './AuthForm.module.scss'
+import { IProps } from './AuthForm.type'
 
-interface Props {
-	handleInputEmail: (e: React.ChangeEvent<HTMLInputElement>) => void
-	handleInputPassword: (e: React.ChangeEvent<HTMLInputElement>) => void
-}
+const AuthForm: FC<IProps> = memo(
+	({ handleInputEmail, handleInputPassword }) => {
+		return (
+			<form className={styles.form}>
+				<Input
+					type='email'
+					label='Введите почту'
+					placeholder='exemple@mail.com'
+					onChange={handleInputEmail}
+				/>
 
-const AuthForm = ({ handleInputEmail, handleInputPassword }: Props) => {
-	return (
-		<form className={styles.form}>
-			<Input
-				type='email'
-				label='Введите почту'
-				placeholder='exemple@mail.com'
-				onChange={handleInputEmail}
-			/>
-
-			<Input
-				type='password'
-				label='Введите пароль'
-				placeholder='•••••••••'
-				onChange={handleInputPassword}
-			/>
-		</form>
-	)
-}
+				<Input
+					type='password'
+					label='Введите пароль'
+					placeholder='•••••••••'
+					onChange={handleInputPassword}
+				/>
+			</form>
+		)
+	}
+)
 
 export default AuthForm

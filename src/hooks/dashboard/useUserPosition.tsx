@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react'
 
-export const useUserPosition = () => {
+interface UseUserPositionProps {
+	setMapCenter: React.Dispatch<
+		React.SetStateAction<{ lat: number; lng: number }>
+	>
+}
+
+export const useUserPosition = ({ setMapCenter }: UseUserPositionProps) => {
 	const [userPosition, setUserPosition] = useState<{
 		lat: number
 		lng: number
@@ -11,6 +17,10 @@ export const useUserPosition = () => {
 			navigator.geolocation.getCurrentPosition(
 				position => {
 					setUserPosition({
+						lat: position.coords.latitude,
+						lng: position.coords.longitude,
+					})
+					setMapCenter({
 						lat: position.coords.latitude,
 						lng: position.coords.longitude,
 					})

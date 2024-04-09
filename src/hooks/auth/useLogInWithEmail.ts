@@ -2,7 +2,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { auth } from '@/firebase'
+import { auth } from '@/API/firebase'
 import { IProps } from '@hooks/auth/auth.type'
 import { login } from '@store/slices/authSlice'
 
