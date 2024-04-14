@@ -1,84 +1,51 @@
-import {
-	Circle,
-	GoogleMap,
-	Marker,
-	useJsApiLoader,
-} from '@react-google-maps/api'
-
+import { Circle, GoogleMap, Marker, Polyline } from '@react-google-maps/api'
 import { LocateFixed } from 'lucide-react'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
+
+import { useMapCenterEffect } from '@/hooks/dashboard/useMapCenterEffect'
+import { usePlaces } from '@/hooks/dashboard/usePlaces'
+import { useRouteEffect } from '@/hooks/dashboard/useRouteEffect'
+import { useUserPosition } from '@/hooks/dashboard/useUserPosition'
+import { selectSelectedPlace } from '@/store/slices/placeSlice'
+import { RootState } from '@/store/store'
 
 import MainButton from '../UI/MainButton/MainButton'
-
+import RenderPlaceMarkers from './RenderPlaceMarkers/RenderPlaceMarkers'
+import UserMarker from './UserMarker/UserMarker'
 import { defaultOptions } from './defaultOptions'
+import { googleMapsLoader, useHandleMarkerClick } from './utils'
 
-import { usePlaces } from '@/hooks/dashboard/usePlaces'
-import { useUserPosition } from '@/hooks/dashboard/useUserPosition'
-import { RootState } from '@/store/store'
-import { useDispatch, useSelector } from 'react-redux'
 import styles from './Map.module.scss'
-
-import { fetchPlaceDetails } from '@/hooks/dashboard/usePlaceDetails'
-import { togglePlace } from '@/store/slices/dashboardSlice'
-import { selectSelectedPlace } from '@/store/slices/placeSlice'
-import { useEffect, useState } from 'react'
-import { icons } from './utils'
 
 const { VITE_GOOGLE_KEY } = import.meta.env
 
 interface PlaceProps {
-	setPlaceDetails: (newValue: any) => void
+	destination: { lat: number; lng: number } | null
 }
 
-const Map = ({ setPlaceDetails }: PlaceProps) => {
-	const { isLoaded } = useJsApiLoader({
-		id: 'google-map-script',
-		googleMapsApiKey: VITE_GOOGLE_KEY,
-	})
+const Map = ({ destination }: PlaceProps) => {
+	const { isLoaded } = googleMapsLoader(VITE_GOOGLE_KEY)
 
 	const radius = useSelector(
 		(state: RootState) => state.radiusSlice.radiusSlice
 	)
-	const defaultUserPosition = { lat: 53.9007, lng: 27.5709 }
+	const route = useSelector((state: RootState) => state.distance.route)
+	const selectedPlace = useSelector(selectSelectedPlace)
+
 	const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({
 		lat: 53.9007,
 		lng: 27.5709,
 	})
+
 	const { userPosition, getUserPosition } = useUserPosition({ setMapCenter })
-
 	const places = usePlaces({
-		userPosition: userPosition || defaultUserPosition,
+		lat: userPosition?.lat || 53.9007,
+		lng: userPosition?.lng || 27.5709,
 	})
-
-	const [circleRadius, setCircleRadius] = useState<number | undefined>(
-		undefined
-	)
-
-	useEffect(() => {
-		setCircleRadius(radius !== 0 ? radius : undefined)
-	}, [radius])
-
-	const dispatch = useDispatch()
-
-	const handleTogglePlace = () => {
-		dispatch(togglePlace())
-	}
-
-	const handleMarkerClick = async (placeId: string) => {
-		const details = await fetchPlaceDetails(placeId, VITE_GOOGLE_KEY)
-		setPlaceDetails(details)
-		handleTogglePlace()
-	}
-
-	const selectedPlace = useSelector(selectSelectedPlace)
-
-	useEffect(() => {
-		if (selectedPlace) {
-			setMapCenter({
-				lat: selectedPlace.location.lat,
-				lng: selectedPlace.location.lng,
-			})
-		}
-	}, [selectedPlace])
+	const handleMarkerClick = useHandleMarkerClick()
+	useMapCenterEffect(selectedPlace, setMapCenter)
+	useRouteEffect(destination, userPosition)
 
 	return isLoaded ? (
 		<GoogleMap
@@ -106,7 +73,7 @@ const Map = ({ setPlaceDetails }: PlaceProps) => {
 				<>
 					<Circle
 						center={userPosition}
-						radius={circleRadius}
+						radius={radius}
 						options={{
 							center: userPosition,
 							radius: radius,
@@ -117,35 +84,24 @@ const Map = ({ setPlaceDetails }: PlaceProps) => {
 							fillOpacity: 0.3,
 						}}
 					/>
-					<Marker
-						position={userPosition}
-						icon={{
-							url: '../../../public/userMarker.png',
-							scaledSize: new window.google.maps.Size(25, 20),
-						}}
-					/>
+					<UserMarker userPosition={userPosition} />
 				</>
 			)}
 
-			{userPosition &&
-				places.map((place: any) => {
-					const iconUrl = icons[place.types.find((type: string) => icons[type])]
-					return (
-						<Marker
-							key={place.place_id}
-							position={{
-								lat: place.geometry.location.lat,
-								lng: place.geometry.location.lng,
-							}}
-							title={place.name}
-							icon={{
-								url: iconUrl ? iconUrl : '',
-								scaledSize: new window.google.maps.Size(30, 30),
-							}}
-							onClick={() => handleMarkerClick(place.place_id)}
-						/>
-					)
-				})}
+			{userPosition && (
+				<RenderPlaceMarkers
+					places={places}
+					handleMarkerClick={() => handleMarkerClick(selectedPlace.place_id)}
+				/>
+			)}
+
+			{route && (
+				<Polyline
+					key={route}
+					path={route.overview_path}
+					options={{ strokeColor: '#FF0000' }}
+				/>
+			)}
 		</GoogleMap>
 	) : null
 }

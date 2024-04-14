@@ -4,7 +4,7 @@ import styles from './MainButton.module.scss'
 
 interface IButton {
 	text?: string
-	svg: ReactNode
+	svg?: ReactNode
 	onClick?: MouseEventHandler<HTMLButtonElement>
 }
 

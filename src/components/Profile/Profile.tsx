@@ -1,24 +1,25 @@
+import classNames from 'classnames'
 import { CircleUserRound, LogOut } from 'lucide-react'
+import { useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { logout } from '@/store/slices/authSlice'
-
 import { RootState } from '@/store/store'
-import classNames from 'classnames'
+
 import MainButton from '../UI/MainButton/MainButton'
 import styles from './Profile.module.scss'
 
 const Profile = () => {
 	const dispatch = useDispatch()
 
-	const handleLogOut = () => {
+	const handleLogOut = useCallback(() => {
 		dispatch(logout())
-	}
+	}, [dispatch])
 
 	const { isProfileOpen } = useSelector((state: RootState) => state.dashboard)
 
-	const userEmail = localStorage.getItem('userEmail')
-	const photoURL = localStorage.getItem('photoURL')
+	const userEmail = useMemo(() => localStorage.getItem('userEmail'), [])
+	const photoURL = useMemo(() => localStorage.getItem('photoURL'), [])
 
 	return (
 		<section

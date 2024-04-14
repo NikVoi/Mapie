@@ -1,17 +1,18 @@
+import { RootState } from '@/store/store'
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 const useLoader = () => {
 	const [loading, setLoading] = useState(true)
+	const isAuthenticated = useSelector(
+		(state: RootState) => state.auth.isAuthenticated
+	)
 
 	useEffect(() => {
-		const timer = setTimeout(() => {
-			setLoading(false)
-		}, 2000)
+		setLoading(!isAuthenticated)
+	}, [isAuthenticated])
 
-		return () => clearTimeout(timer)
-	}, [])
-
-	return loading
+	return { loading, isAuthenticated }
 }
 
 export default useLoader

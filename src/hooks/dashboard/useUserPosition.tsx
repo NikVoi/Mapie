@@ -1,45 +1,32 @@
+import { IPosition } from '@/types/types'
 import { useEffect, useState } from 'react'
+import { IUserPositionProps } from './types'
 
-interface UseUserPositionProps {
-	setMapCenter: React.Dispatch<
-		React.SetStateAction<{ lat: number; lng: number }>
-	>
-}
-
-export const useUserPosition = ({ setMapCenter }: UseUserPositionProps) => {
-	const [userPosition, setUserPosition] = useState<{
-		lat: number
-		lng: number
-	} | null>(null)
+export const useUserPosition = ({ setMapCenter }: IUserPositionProps) => {
+	const [userPosition, setUserPosition] = useState<IPosition | null>(null)
 
 	const getUserPosition = () => {
-		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(
-				position => {
-					setUserPosition({
-						lat: position.coords.latitude,
-						lng: position.coords.longitude,
-					})
-					setMapCenter({
-						lat: position.coords.latitude,
-						lng: position.coords.longitude,
-					})
-				},
-				error => {
-					console.error('Error getting user position:', error)
-				}
-			)
-		} else {
-			console.error('Geolocation is not supported by this browser.')
-		}
+		navigator.geolocation.getCurrentPosition(
+			position => {
+				const { latitude, longitude } = position.coords
+				const newPosition: IPosition = { lat: latitude, lng: longitude }
+
+				setUserPosition(newPosition)
+				setMapCenter(newPosition)
+			},
+			error => {
+				console.error('Error getting user position:', error)
+			}
+		)
 	}
 
 	useEffect(() => {
-		getUserPosition()
+		if (navigator.geolocation) {
+			getUserPosition()
+		} else {
+			console.error('Geolocation is not supported by this browser.')
+		}
 	}, [])
 
-	return {
-		userPosition,
-		getUserPosition,
-	}
+	return { userPosition, getUserPosition }
 }

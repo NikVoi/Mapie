@@ -28,6 +28,7 @@
 			"@hooks/*": ["src/hooks/*"],
 			"@store/*": ["src/store/*"],
 			"@utils/*": ["src/utils/*"],
+			"@types/*": ["src/types/*"],
 			"@API/*": ["src/API/*"]
 		}
 	},

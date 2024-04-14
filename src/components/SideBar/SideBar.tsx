@@ -5,6 +5,7 @@ import {
 	toggleProfile,
 	toggleSearch,
 } from '@/store/slices/dashboardSlice'
+import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import MainButton from '../UI/MainButton/MainButton'
 import styles from './SideBar.module.scss'
@@ -14,17 +15,17 @@ const SideBar = () => {
 
 	const dispatch = useDispatch()
 
-	const handleToggleProfile = () => {
+	const handleToggleProfile = useCallback(() => {
 		dispatch(toggleProfile())
-	}
+	}, [dispatch])
 
-	const handleToggleFavorites = () => {
+	const handleToggleFavorites = useCallback(() => {
 		dispatch(toggleFavorites())
-	}
+	}, [dispatch])
 
-	const handleToggleSearch = () => {
+	const handleToggleSearch = useCallback(() => {
 		dispatch(toggleSearch())
-	}
+	}, [dispatch])
 
 	return (
 		<aside className={styles.SideBar}>
