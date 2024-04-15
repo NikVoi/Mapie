@@ -1,6 +1,6 @@
-import { ChevronRight } from 'lucide-react'
 import { useCallback } from 'react'
-import { FaBookmark } from 'react-icons/fa'
+import { FaBookmark } from 'react-icons/fa6'
+import { MdPlayArrow } from 'react-icons/md'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { setPlaceDetails } from '@/store/slices/Place/placeDetailsSlice'
@@ -63,7 +63,7 @@ const Item = ({ placeDetails }: IItemProps) => {
 
 			<div className={styles.buttons}>
 				<MainButton onClick={toggleFavorite} svg={<FaBookmark />} />
-				<MainButton onClick={handleOpenPlaceDetails} svg={<ChevronRight />} />
+				<MainButton onClick={handleOpenPlaceDetails} svg={<MdPlayArrow />} />
 			</div>
 		</div>
 	)

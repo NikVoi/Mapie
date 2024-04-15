@@ -1,5 +1,6 @@
 import { IPosition } from '@/types/types'
 import axios, { AxiosResponse } from 'axios'
+const { VITE_PLACES_API } = import.meta.env
 
 interface IFetch {
 	pos: IPosition
@@ -15,17 +16,14 @@ export const fetchPlaces = async ({
 	types,
 }: IFetch): Promise<any> => {
 	try {
-		const response: AxiosResponse<any> = await axios.get(
-			'http://localhost:3000/places',
-			{
-				params: {
-					location: `${pos.lat},${pos.lng}`,
-					radius: radius,
-					key: apiKey,
-					types: types,
-				},
-			}
-		)
+		const response: AxiosResponse<any> = await axios.get(`${VITE_PLACES_API}`, {
+			params: {
+				location: `${pos.lat},${pos.lng}`,
+				radius: radius,
+				key: apiKey,
+				types: types,
+			},
+		})
 
 		return response.data.results
 	} catch (error) {

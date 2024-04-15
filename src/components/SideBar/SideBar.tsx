@@ -1,13 +1,16 @@
-import { BookHeart, CircleUserRound, Search } from 'lucide-react'
+import { CircleUserRound, Search } from 'lucide-react'
+import { useCallback } from 'react'
+import { FaBookmark } from 'react-icons/fa6'
+import { useDispatch, useSelector } from 'react-redux'
 
 import {
 	toggleFavorites,
 	toggleProfile,
 	toggleSearch,
 } from '@/store/slices/dashboardSlice'
-import { useCallback } from 'react'
-import { useDispatch } from 'react-redux'
-import MainButton from '../UI/MainButton/MainButton'
+
+import { RootState } from '@/store/store'
+import SideButton from '../UI/SideButton/SideButton'
 import styles from './SideBar.module.scss'
 
 const SideBar = () => {
@@ -27,6 +30,13 @@ const SideBar = () => {
 		dispatch(toggleSearch())
 	}, [dispatch])
 
+	const isFavoritesOpen = useSelector(
+		(state: RootState) => state.dashboard.isFavoritesOpen
+	)
+	const isSearchOpen = useSelector(
+		(state: RootState) => state.dashboard.isSearchOpen
+	)
+
 	return (
 		<aside className={styles.SideBar}>
 			<div className={styles.logo}>
@@ -34,8 +44,16 @@ const SideBar = () => {
 			</div>
 
 			<div className={styles.wrapper}>
-				<MainButton onClick={handleToggleSearch} svg={<Search />} />
-				<MainButton onClick={handleToggleFavorites} svg={<BookHeart />} />
+				<SideButton
+					onClick={handleToggleSearch}
+					svg={<Search />}
+					isActive={isSearchOpen}
+				/>
+				<SideButton
+					onClick={handleToggleFavorites}
+					svg={<FaBookmark />}
+					isActive={isFavoritesOpen}
+				/>
 			</div>
 
 			<div className={styles.avatar} onClick={handleToggleProfile}>

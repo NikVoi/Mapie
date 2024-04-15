@@ -3,6 +3,7 @@ import {
 	setClearRoute,
 	setDistance,
 	setDuration,
+	setIsWindowOpen,
 } from '@/store/slices/distanceSlice'
 import { RootState } from '@/store/store'
 import { IoClose } from 'react-icons/io5'
@@ -25,6 +26,7 @@ const Road = () => {
 		dispatch(setClearRoute(true))
 		dispatch(setDistance(null))
 		dispatch(setDuration(null))
+		dispatch(setIsWindowOpen(false))
 	}
 
 	return (

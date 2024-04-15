@@ -1,14 +1,24 @@
 import {
 	setDistance,
 	setDuration,
+	setIsWindowOpen,
 	setRoute,
 } from '@/store/slices/distanceSlice'
-import { useEffect } from 'react'
+import { MutableRefObject, RefObject, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-export const useRouteEffect = (destination: any, userPosition: any) => {
+export const useRouteEffect = (
+	destination: any,
+	userPosition: any,
+	polylineRef: MutableRefObject<google.maps.Polyline | null>,
+	mapRef: RefObject<google.maps.Map | null>
+) => {
 	const dispatch = useDispatch()
 	useEffect(() => {
+		if (polylineRef.current && polylineRef.current.setMap) {
+			polylineRef.current.setMap(null)
+		}
+
 		if (destination && userPosition) {
 			const directionsService = new window.google.maps.DirectionsService()
 			directionsService.route(
@@ -25,7 +35,12 @@ export const useRouteEffect = (destination: any, userPosition: any) => {
 							const durationText = route.legs[0].duration?.text ?? null
 							dispatch(setDistance(distanceText))
 							dispatch(setDuration(durationText))
-							dispatch(setRoute(route))
+							dispatch(
+								setRoute({
+									overview_path: route.overview_path,
+								})
+							)
+							dispatch(setIsWindowOpen(true))
 						} else {
 							console.error('Route legs are undefined')
 						}

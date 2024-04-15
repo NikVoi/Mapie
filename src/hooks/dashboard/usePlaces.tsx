@@ -28,8 +28,6 @@ export const usePlaces = ({ lat, lng }: IPosition) => {
 					isPlaceInsideCircle(place, lat, lng, radius)
 				)
 
-				placesData.forEach((item: any) => console.log(item))
-
 				setPlaces(filteredPlaces)
 			} catch (error) {
 				console.error('Error fetching places:', error)

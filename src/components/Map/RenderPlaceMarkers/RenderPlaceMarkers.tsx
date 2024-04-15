@@ -2,16 +2,14 @@ import { ILocation } from '@/hooks/dashboard/types'
 import { Marker } from '@react-google-maps/api'
 import { FC } from 'react'
 import { icons } from '../iconName'
+import { useHandleMarkerClick } from '../utils'
 
 interface RenderPlaceMarkersProps {
 	places: ILocation[]
-	handleMarkerClick: (placeId: string) => void
 }
 
-const RenderPlaceMarkers: FC<RenderPlaceMarkersProps> = ({
-	places,
-	handleMarkerClick,
-}) => {
+const RenderPlaceMarkers: FC<RenderPlaceMarkersProps> = ({ places }) => {
+	const handleMarkerClick = useHandleMarkerClick()
 	return (
 		<>
 			{places.map((place: ILocation) => {

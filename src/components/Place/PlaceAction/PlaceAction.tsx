@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { MapPin } from 'lucide-react'
 import { FC } from 'react'
-import { MdOutlineFavorite } from 'react-icons/md'
+import { FaBookmark } from 'react-icons/fa6'
 
 import MainButton from '@/components/UI/MainButton/MainButton'
 
@@ -18,7 +18,7 @@ const PlaceActions: FC<IPlaceActionsProps> = ({
 		<MainButton
 			text='Сохранить'
 			onClick={onToggleFavorite}
-			svg={<MdOutlineFavorite />}
+			svg={<FaBookmark />}
 		/>
 		<MainButton text='Маршрут' onClick={onRouteClick} svg={<MapPin />} />
 	</div>

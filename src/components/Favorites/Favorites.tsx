@@ -1,3 +1,4 @@
+import { Autocomplete } from '@react-google-maps/api'
 import classNames from 'classnames'
 import { ChevronLeft } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,7 +9,6 @@ import { RootState } from '@/store/store'
 
 import useAutocomplete from '@/hooks/dashboard/Search/useAutocomplete'
 import usePlaceSelection from '@/hooks/dashboard/Search/usePlaceSelection'
-import { Autocomplete } from '@react-google-maps/api'
 import Input from '../UI/Input/Input'
 import styles from './Favorites.module.scss'
 import Item from './Item/Item'
