@@ -22,11 +22,11 @@
 	@apply flex justify-between mb-5 last:mb-0;
 
 	& button {
-		@apply first:bg-white size-16 border-none;
+		@apply first:bg-white size-16 border-none last:p-2 last:bg-white last:text-black;
 
 		&:first-child {
 			& svg {
-				@apply size-12 fill-red-600;
+				@apply size-10 fill-red-600;
 			}
 		}
 	}

@@ -1,16 +1,15 @@
 .SideBar {
-	@apply relative z-30 flex flex-col justify-between items-center  w-32 h-full p-4 border-r-2 border-solid border-gray-400 bg-white;
+	@apply relative z-50 flex flex-col justify-between items-center w-32 h-full p-4 border-r-2 border-solid border-gray-400 bg-white
+	max-md:w-28;
 }
 
 .logo {
-	@apply w-16 h-16;
+	@apply size-16 max-md:size-12;
 }
 
 .wrapper {
 	& button {
-		@apply w-20 h-20 flex-1 first:mb-5 border-2 border-solid border-gray-400 first:hover:text-blue-600 first:bg-blue-600 hover:bg-white
-		last:hover:text-red-500
-		last:bg-red-500;
+		@apply flex-1 first:mb-5;
 	}
 }
 

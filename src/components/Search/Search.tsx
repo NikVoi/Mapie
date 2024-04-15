@@ -8,9 +8,9 @@ import useItemSelection from '@/hooks/dashboard/Search/useItemSelection'
 import useRadiusInput from '@/hooks/dashboard/Search/useRadiusInput'
 
 import { toggleSearch } from '@/store/slices/dashboardSlice'
-import { selectPlace } from '@/store/slices/placeSlice'
 import { RootState } from '@/store/store'
 
+import usePlaceSelection from '@/hooks/dashboard/Search/usePlaceSelection'
 import Input from '../UI/Input/Input'
 import Item from './Item/Item'
 import styles from './Search.module.scss'
@@ -23,17 +23,11 @@ const Search = () => {
 	const handleToggleSearch = () => {
 		dispatch(toggleSearch())
 	}
+
 	const { autocomplete, onLoad } = useAutocomplete()
 	const { handleItemClick } = useItemSelection()
 	const { inputValue, handleChange } = useRadiusInput()
-
-	const handlePlaceSelect = () => {
-		if (autocomplete !== null) {
-			const place = autocomplete.getPlace()
-			console.log('Выбранное место:', place)
-			dispatch(selectPlace(place))
-		}
-	}
+	const { handlePlaceSelect } = usePlaceSelection(autocomplete)
 
 	return (
 		<section

@@ -13,7 +13,7 @@ const Button: FC<IButton> = ({ onClick, text, img, svg }) => {
 		<button className={styles.button} onClick={onClick}>
 			{img && <img src={img} className={styles.ico}></img>}
 			{svg}
-			{text}
+			<span>{text}</span>
 		</button>
 	)
 }

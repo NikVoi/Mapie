@@ -1,3 +1,4 @@
+import { Autocomplete } from '@react-google-maps/api'
 import classNames from 'classnames'
 import { ChevronLeft } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -5,15 +6,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { toggleFavorites } from '@/store/slices/dashboardSlice'
 import { selectFavorites } from '@/store/slices/favoritesSlice'
 import { RootState } from '@/store/store'
+
+import useAutocomplete from '@/hooks/dashboard/Search/useAutocomplete'
+import usePlaceSelection from '@/hooks/dashboard/Search/usePlaceSelection'
 import Input from '../UI/Input/Input'
 import styles from './Favorites.module.scss'
 import Item from './Item/Item'
 
-interface Props {
-	setPlaceDetails: (newValue: any) => void
-}
-
-const Favorites = ({ setPlaceDetails }: Props) => {
+const Favorites = () => {
 	const favorites = useSelector(selectFavorites)
 
 	const dispatch = useDispatch()
@@ -24,6 +24,9 @@ const Favorites = ({ setPlaceDetails }: Props) => {
 		dispatch(toggleFavorites())
 	}
 
+	const { autocomplete, onLoad } = useAutocomplete()
+	const { handlePlaceSelect } = usePlaceSelection(autocomplete)
+
 	return (
 		<section
 			className={classNames(styles.favorites, {
@@ -32,7 +35,9 @@ const Favorites = ({ setPlaceDetails }: Props) => {
 		>
 			<div className={styles.main}>
 				<div className={styles.search}>
-					<Input placeholder='Место, адрес..' />
+					<Autocomplete onLoad={onLoad} onPlaceChanged={handlePlaceSelect}>
+						<Input placeholder='Место, адрес..' />
+					</Autocomplete>
 				</div>
 
 				<div className={styles.title}>
@@ -42,11 +47,7 @@ const Favorites = ({ setPlaceDetails }: Props) => {
 				<div className={styles.wrapper}>
 					{favorites.length > 0 ? (
 						favorites.map((favorite, index) => (
-							<Item
-								key={index}
-								placeDetails={favorite}
-								setPlaceDetails={setPlaceDetails}
-							/>
+							<Item key={index} placeDetails={favorite} />
 						))
 					) : (
 						<div className={styles.empty}>Избранных мест пока нет</div>

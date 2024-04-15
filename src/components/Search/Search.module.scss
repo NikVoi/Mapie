@@ -1,5 +1,5 @@
 .search {
-	@apply absolute z-10 top-0 -left-36 flex items-center w-36 h-full duration-200;
+	@apply absolute z-30 top-0 -left-36 flex items-center w-36 h-full duration-200 max-md:w-full;
 	transition: left 0.3s ease;
 
 	&.open {
@@ -12,7 +12,7 @@
 }
 
 .main {
-	@apply w-full h-full bg-white overflow-y-scroll  p-6;
+	@apply flex-1 w-full h-full bg-white overflow-y-scroll p-6;
 }
 
 .search::-webkit-scrollbar {
@@ -55,7 +55,7 @@
 	@apply flex items-center p-4 hover:bg-slate-300 cursor-pointer;
 
 	.ico {
-		@apply size-12  rounded-full mr-6;
+		@apply size-12 rounded-full mr-6;
 	}
 
 	.name {

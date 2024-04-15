@@ -12,14 +12,12 @@
 	"dependencies": {
 		"@react-google-maps/api": "^2.19.3",
 		"@reduxjs/toolkit": "^2.2.2",
-		"autoprefixer": "^10.4.19",
 		"axios": "^1.6.8",
 		"classnames": "^2.5.1",
 		"firebase": "^10.9.0",
 		"framer-motion": "^11.0.22",
 		"init": "^0.1.2",
 		"lucide-react": "^0.361.0",
-		"postcss": "^8.4.38",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-icons": "^5.0.1",
@@ -40,6 +38,8 @@
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-react-refresh": "^0.4.6",
 		"typescript": "^5.2.2",
-		"vite": "^5.2.0"
+		"vite": "^5.2.0",
+		"autoprefixer": "^10.4.19",
+		"postcss": "^8.4.38"
 	}
 }

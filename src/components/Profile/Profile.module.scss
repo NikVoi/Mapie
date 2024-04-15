@@ -1,5 +1,5 @@
 .Profile {
-	@apply absolute z-20 bottom-3 -left-full p-8 w-24 bg-zinc-300 flex justify-center items-center border-2 border-solid border-gray-400 rounded-xl;
+	@apply absolute z-40 bottom-3 -left-full p-8 w-24 bg-zinc-300 flex justify-center items-center border-2 border-solid border-gray-400 rounded-xl;
 
 	transition: left 0.5s ease;
 	&.open {

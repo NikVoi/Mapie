@@ -1,10 +1,12 @@
-import { setRadius } from '@/store/slices/radiusSlice'
-import { RootState } from '@/store/store'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { setRadius } from '@/store/slices/radiusSlice'
+import { RootState } from '@/store/store'
+
 const useRadiusInput = () => {
 	const dispatch = useDispatch()
+
 	const radius = useSelector(
 		(state: RootState) => state.radiusSlice.radiusSlice
 	)

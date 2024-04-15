@@ -1,56 +1,48 @@
-import MainButton from '@/components/UI/MainButton/MainButton'
-import { setPlaceOpen, toggleFavorites } from '@/store/slices/dashboardSlice'
-import {
-	addPlace,
-	removePlace,
-	selectFavorites,
-} from '@/store/slices/favoritesSlice'
-import { RootState } from '@/store/store'
 import classNames from 'classnames'
-import { ChevronLeft, MapPin } from 'lucide-react'
-import { MdOutlineFavorite } from 'react-icons/md'
+import { ChevronLeft } from 'lucide-react'
+import { FC, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+
+import { RootState } from '@/store/store'
+
+import MainButton from '@components/UI/MainButton/MainButton'
 import styles from './Place.module.scss'
+import PlaceActions from './PlaceAction/PlaceAction'
+import PlaceDetails from './PlaceDetails/PlaceDetails'
+import PlacePhoto from './PlacePhoto/PlacePhoto'
 
-import placeholder from '@assets/img-placeholder.png'
+import usePlace from '@/hooks/Place/usePlace'
+import { selectPlaceDetails } from '@/store/slices/Place/placeDetailsSlice'
+import { setPlaceOpen, toggleFavorites } from '@/store/slices/dashboardSlice'
+import { IPlaceProps } from './types'
 
-interface Props {
-	placeDetails: any
-}
-
-const Place = ({ placeDetails }: Props) => {
+const Place: FC<IPlaceProps> = ({ onClick }) => {
 	const dispatch = useDispatch()
+
+	const selectedPlace = useSelector(selectPlaceDetails)
 
 	const { isPlaceOpen } = useSelector((state: RootState) => state.dashboard)
 
-	const handleToggleFavorites = () => {
-		dispatch(toggleFavorites())
-	}
+	const { toggleFavorite, isPlaceInFavorites } = usePlace(selectedPlace)
 
-	const handleClose = () => {
-		dispatch(setPlaceOpen(false))
-	}
+	const handleRouteClick = () => {
+		if (selectedPlace && selectedPlace.location) {
+			const destination = {
+				lat: selectedPlace.location.latitude,
+				lng: selectedPlace.location.longitude,
+			}
 
-	const click = () => {}
-
-	const favorites = useSelector(selectFavorites)
-
-	const isFavorite =
-		placeDetails &&
-		placeDetails.id &&
-		favorites.some(favorite => favorite.id === placeDetails.id)
-
-	const toggleFavorite = () => {
-		const isInFavorites = favorites.some(
-			favorite => favorite.id === placeDetails.id
-		)
-
-		if (!isInFavorites) {
-			dispatch(addPlace(placeDetails))
-		} else {
-			dispatch(removePlace(placeDetails.id))
+			onClick(destination)
 		}
 	}
+
+	const handleToggleFavorites = useCallback(() => {
+		dispatch(toggleFavorites())
+	}, [dispatch])
+
+	const handleClose = useCallback(() => {
+		dispatch(setPlaceOpen(false))
+	}, [dispatch])
 
 	return (
 		<section
@@ -61,53 +53,28 @@ const Place = ({ placeDetails }: Props) => {
 			<div className={styles.wrapper}>
 				<div className={styles.title}>
 					<MainButton svg={<ChevronLeft />} onClick={handleToggleFavorites} />
-					<span>Избранное:</span>
+
+					<span>Обзор:</span>
 				</div>
 
 				<div className={styles.main}>
-					<div className={styles.img}>
-						{placeDetails &&
-						placeDetails.photos &&
-						placeDetails.photos.length > 0 ? (
-							<img
-								src={`https://places.googleapis.com/v1/${placeDetails.photos[0].name}/media?maxHeightPx=400&maxWidthPx=400&key=AIzaSyAmbnbX7QWlEA41SlYMxemJCSzx7MA_7-I`}
-								alt='pic'
-							/>
-						) : (
-							<img src={placeholder} alt='pic' />
-						)}
-					</div>
+					<PlacePhoto photoName={selectedPlace?.photos?.[0]?.name ?? null} />
 
 					<div className={styles.categories}></div>
 
-					<div className={styles.name}>
-						{placeDetails &&
-						placeDetails.displayName &&
-						placeDetails.displayName.text
-							? placeDetails.displayName.text
-							: 'Нет информации'}
-					</div>
+					<PlaceDetails
+						name={selectedPlace?.displayName?.text ?? 'Нет информации'}
+						description={
+							selectedPlace?.editorialSummary?.text ?? 'Нет информации'
+						}
+						adress={selectedPlace?.formattedAddress || 'Нет информации'}
+					/>
 
-					<div className={styles.description}>
-						{placeDetails &&
-						placeDetails.editorialSummary &&
-						placeDetails.editorialSummary.text
-							? placeDetails.editorialSummary.text
-							: 'Нет информации'}
-					</div>
-
-					<div
-						className={classNames(styles.actions, {
-							[styles.active]: isFavorite,
-						})}
-					>
-						<MainButton
-							text='Сохранить'
-							onClick={toggleFavorite}
-							svg={<MdOutlineFavorite />}
-						/>
-						<MainButton text='Маршрут' onClick={click} svg={<MapPin />} />
-					</div>
+					<PlaceActions
+						onToggleFavorite={toggleFavorite}
+						onRouteClick={handleRouteClick}
+						isFavorite={isPlaceInFavorites}
+					/>
 				</div>
 			</div>
 
