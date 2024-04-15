@@ -1,5 +1,5 @@
 .place {
-	@apply absolute z-10 top-0 -left-36 flex items-center w-36 h-full duration-200;
+	@apply absolute z-10 top-0 -left-36 flex items-center w-36 h-full duration-200 max-md:w-full;
 	transition: left 0.3s ease;
 
 	&.open {
@@ -12,7 +12,7 @@
 }
 
 .main {
-	@apply border border-solid border-gray-400 rounded-2xl p-6;
+	@apply w-full border border-solid border-gray-400 rounded-2xl p-6;
 }
 
 .img {
@@ -31,11 +31,16 @@
 	@apply text-lg mb-4;
 }
 
+.adress {
+	@apply text-lg mb-4;
+}
+
 .actions {
 	@apply flex justify-between items-center;
 
 	& button {
-		@apply text-2xl w-52 first:bg-white first:text-gray-600   last:hover:bg-blue-400;
+		@apply text-2xl w-52 first:bg-white first:text-gray-600   last:hover:bg-blue-400 max-md:text-xl items-center justify-center 
+		max-md:w-44;
 
 		& svg {
 			@apply size-8 mr-2 first:size-7;
@@ -58,7 +63,11 @@
 }
 
 .title {
-	@apply flex justify-start items-center text-3xl font-bold mb-5;
+	@apply flex justify-center items-center text-3xl font-bold mb-5;
+
+	& span {
+		@apply block pt-1;
+	}
 
 	& button {
 		@apply w-10 p-0 bg-white border-none text-black mr-2;

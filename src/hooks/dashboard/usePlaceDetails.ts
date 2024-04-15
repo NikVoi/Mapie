@@ -1,8 +1,10 @@
 import axios from 'axios'
 
+const { VITE_PLACE_DETAILS } = import.meta.env
+
 export const fetchPlaceDetails = async (placeId: string, apiKey: string) => {
 	try {
-		const response = await axios.get(`http://localhost:3000/place-details`, {
+		const response = await axios.get(`${VITE_PLACE_DETAILS}`, {
 			params: {
 				placeId,
 				key: apiKey,

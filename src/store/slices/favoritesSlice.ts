@@ -1,36 +1,9 @@
+import { IPlace } from '@/types/types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../store'
+import { IFavoritesState } from './types'
 
-interface Photos {
-	name: string
-	widthPx: number
-	heightPx: number
-}
-
-interface Place {
-	id: string
-	displayName: {
-		languageCode: string
-		text: string
-	}
-	editorialSummary: {
-		languageCode: string
-		text: string
-	}
-	photos: Photos[]
-	primaryType: string
-	types: string[]
-	location: {
-		latitude: number
-		longitude: number
-	}
-}
-
-interface FavoritesState {
-	places: Place[]
-}
-
-const initialState: FavoritesState = {
+const initialState: IFavoritesState = {
 	places: JSON.parse(localStorage.getItem('favorites') || '[]'),
 }
 
@@ -38,7 +11,7 @@ const favoritesSlice = createSlice({
 	name: 'favorites',
 	initialState,
 	reducers: {
-		addPlace: (state, action: PayloadAction<Place>) => {
+		addPlace: (state, action: PayloadAction<IPlace>) => {
 			state.places.push(action.payload)
 			localStorage.setItem('favorites', JSON.stringify(state.places))
 		},

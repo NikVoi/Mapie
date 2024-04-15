@@ -1,35 +1,37 @@
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 
 import useLoader from '@/hooks/useLoader'
-import { RootState } from '@/store/store'
 
 import Favorites from '../Favorites/Favorites'
-import Loader from '../Loader/Loader'
 import Map from '../Map/Map'
-import Place from '../Place/Place'
 import Profile from '../Profile/Profile'
 import Search from '../Search/Search'
 import SideBar from '../SideBar/SideBar'
 
+import Loader from '../Loader/Loader'
+import Place from '../Place/Place'
+import Road from '../Road/Road'
 import styles from './Dashboard.module.scss'
 
 const Dashboard = () => {
-	const [placeDetails, setPlaceDetails] = useState<any>(null)
+	const [destination, setDestination] = useState<{
+		lat: number
+		lng: number
+	} | null>(null)
 
-	const isAuthenticated = useSelector(
-		(state: RootState) => state.auth.isAuthenticated
-	)
-
-	const loading = useLoader()
-
-	if (!isAuthenticated) {
-		return <Navigate to='/' />
+	const handleRouteClick = (destination: { lat: number; lng: number }) => {
+		setDestination(destination)
 	}
+
+	const { loading, isAuthenticated } = useLoader()
 
 	if (loading) {
 		return <Loader />
+	}
+
+	if (!isAuthenticated) {
+		return <Navigate to='/' />
 	}
 
 	return (
@@ -39,13 +41,15 @@ const Dashboard = () => {
 			<div className={styles.map}>
 				<Profile />
 
-				<Favorites setPlaceDetails={setPlaceDetails} />
+				<Favorites />
 
-				<Place placeDetails={placeDetails} />
+				<Place onClick={handleRouteClick} />
 
 				<Search />
 
-				<Map setPlaceDetails={setPlaceDetails} />
+				<Map destination={destination} />
+
+				<Road />
 			</div>
 		</div>
 	)

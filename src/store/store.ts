@@ -1,6 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
+import placeDetailsReducer from './slices/Place/placeDetailsSlice'
 import authReducer, { login } from './slices/authSlice'
 import dashboardReducer from './slices/dashboardSlice'
+import distanceReducer from './slices/distanceSlice'
 import favoritesReducer from './slices/favoritesSlice'
 import placeReducer from './slices/placeSlice'
 import radiusReducer from './slices/radiusSlice'
@@ -12,6 +14,8 @@ export const store = configureStore({
 		favorites: favoritesReducer,
 		dashboard: dashboardReducer,
 		place: placeReducer,
+		distance: distanceReducer,
+		placeDetails: placeDetailsReducer,
 	},
 })
 
