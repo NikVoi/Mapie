@@ -1,4 +1,4 @@
-import { ILocation } from '@/Hooks/dashboard/Types'
+import { ILocation } from '@/Hooks/Dashboard/Types'
 import { Marker } from '@react-google-maps/api'
 import { FC } from 'react'
 import { icons } from '../IconName'

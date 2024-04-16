@@ -1,4 +1,4 @@
-import { fetchPlaceDetails } from '@/Hooks/dashboard/usePlaceDetails'
+import { fetchPlaceDetails } from '@/Hooks/Dashboard/usePlaceDetails'
 import { togglePlace } from '@/Store/Slices/DashboardSlice'
 import { setPlaceDetails } from '@/Store/Slices/Place/PlaceDetailsSlice'
 import { useJsApiLoader } from '@react-google-maps/api'

@@ -4,14 +4,14 @@ import { ChevronLeft } from 'lucide-react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import useAutocomplete from '@/Hooks/dashboard/Search/useAutocomplete'
-import useItemSelection from '@/Hooks/dashboard/Search/useItemSelection'
-import useRadiusInput from '@/Hooks/dashboard/Search/useRadiusInput'
+import useAutocomplete from '@/Hooks/Dashboard/Search/useAutocomplete'
+import useItemSelection from '@/Hooks/Dashboard/Search/useItemSelection'
+import useRadiusInput from '@/Hooks/Dashboard/Search/useRadiusInput'
 
 import { toggleSearch } from '@/Store/Slices/DashboardSlice'
 import { RootState } from '@/Store/Store'
 
-import usePlaceSelection from '@/Hooks/dashboard/Search/usePlaceSelection'
+import usePlaceSelection from '@/Hooks/Dashboard/Search/usePlaceSelection'
 import Input from '../UI/Input/Input'
 import Item from './Item/Item'
 import { data } from './Search.data'

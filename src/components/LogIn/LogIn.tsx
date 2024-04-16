@@ -1,10 +1,10 @@
 import { useCallback } from 'react'
 import { Link } from 'react-router-dom'
 
-import useAuthenticationRedirect from '@/Hooks/auth/UseAuthRedirect'
-import useSingInWithEmail from '@/Hooks/auth/UseLogInWithEmail'
-import useLogInWithGoogle from '@/Hooks/auth/UseLogInWithGoogle'
-import useUserData from '@/Hooks/auth/UseUserData'
+import useAuthenticationRedirect from '@/Hooks/Auth/UseAuthRedirect'
+import useSingInWithEmail from '@/Hooks/Auth/UseLogInWithEmail'
+import useLogInWithGoogle from '@/Hooks/Auth/UseLogInWithGoogle'
+import useUserData from '@/Hooks/Auth/UseUserData'
 
 import AuthForm from '@/Components/AuthForm/AuthForm'
 import CustomAlert from '@/Components/CustomAlert/CustomAlert'

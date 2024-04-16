@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import { X } from 'lucide-react'
 import { FC, useEffect } from 'react'
 
-import { IProps } from '@/Hooks/auth/Auth.type'
+import { IProps } from '@/Hooks/Auth/Auth.type'
 import { createPortal } from 'react-dom'
 import { getIcon, getMessage } from './Config'
 import styles from './CustomAlert.module.scss'
