@@ -1,8 +1,8 @@
-import { ILocation } from '@/hooks/dashboard/types'
+import { ILocation } from '@/Hooks/dashboard/types'
 import { Marker } from '@react-google-maps/api'
 import { FC } from 'react'
-import { icons } from '../iconName'
-import { useHandleMarkerClick } from '../utils'
+import { icons } from '../IconName'
+import { useHandleMarkerClick } from '../Utils'
 
 interface RenderPlaceMarkersProps {
 	places: ILocation[]

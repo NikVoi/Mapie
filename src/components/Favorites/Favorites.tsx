@@ -3,19 +3,17 @@ import classNames from 'classnames'
 import { ChevronLeft } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { toggleFavorites } from '@/store/slices/dashboardSlice'
-import { selectFavorites } from '@/store/slices/favoritesSlice'
-import { RootState } from '@/store/store'
+import { toggleFavorites } from '@/Store/Slices/DashboardSlice'
+import { RootState } from '@/Store/Store'
 
-import useAutocomplete from '@/hooks/dashboard/Search/useAutocomplete'
-import usePlaceSelection from '@/hooks/dashboard/Search/usePlaceSelection'
+import { useFavorites } from '@/Hooks/Favorites/UseFavorites'
+import useAutocomplete from '@/Hooks/dashboard/Search/useAutocomplete'
+import usePlaceSelection from '@/Hooks/dashboard/Search/usePlaceSelection'
 import Input from '../UI/Input/Input'
 import styles from './Favorites.module.scss'
 import Item from './Item/Item'
 
 const Favorites = () => {
-	const favorites = useSelector(selectFavorites)
-
 	const dispatch = useDispatch()
 
 	const { isFavoritesOpen } = useSelector((state: RootState) => state.dashboard)
@@ -26,6 +24,8 @@ const Favorites = () => {
 
 	const { autocomplete, onLoad } = useAutocomplete()
 	const { handlePlaceSelect } = usePlaceSelection(autocomplete)
+
+	const { favorites, handleRemoveFavorite } = useFavorites()
 
 	return (
 		<section
@@ -47,7 +47,11 @@ const Favorites = () => {
 				<div className={styles.wrapper}>
 					{favorites.length > 0 ? (
 						favorites.map((favorite, index) => (
-							<Item key={index} placeDetails={favorite} />
+							<Item
+								key={index}
+								placeDetails={favorite}
+								onRemove={handleRemoveFavorite}
+							/>
 						))
 					) : (
 						<div className={styles.empty}>Избранных мест пока нет</div>

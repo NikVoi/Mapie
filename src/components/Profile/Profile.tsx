@@ -3,8 +3,8 @@ import { CircleUserRound, LogOut } from 'lucide-react'
 import { useCallback, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { logout } from '@/store/slices/authSlice'
-import { RootState } from '@/store/store'
+import { logout } from '@/Store/Slices/AuthSlice'
+import { RootState } from '@/Store/Store'
 
 import MainButton from '../UI/MainButton/MainButton'
 import styles from './Profile.module.scss'

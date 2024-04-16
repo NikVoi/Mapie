@@ -23,15 +23,15 @@
 		"baseUrl": ".",
 		"paths": {
 			"@/*": ["src/*"],
-			"@components/*": ["src/components/*"],
-			"@assets/*": ["src/assets/*"],
-			"@hooks/*": ["src/hooks/*"],
-			"@store/*": ["src/store/*"],
-			"@utils/*": ["src/utils/*"],
-			"@types/*": ["src/types/*"],
+			"@Components/*": ["src/Components/*"],
+			"@Assets/*": ["src/Assets/*"],
+			"@Hooks/*": ["src/Hooks/*"],
+			"@Store/*": ["src/Store/*"],
+			"@Utils/*": ["src/Utils/*"],
+			"@Types/*": ["src/Types/*"],
 			"@API/*": ["src/API/*"]
 		}
 	},
-	"include": ["src", "src/components/Search/search.data.ts"],
+	"include": ["src", "src/Components/Search/Search.data.ts"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

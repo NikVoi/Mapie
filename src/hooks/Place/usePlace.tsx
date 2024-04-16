@@ -1,9 +1,10 @@
+import { saveDataToFirebase } from '@/API/Firebase'
 import {
 	addPlace,
 	removePlace,
 	selectFavorites,
-} from '@/store/slices/favoritesSlice'
-import { IPlace } from '@/types/types'
+} from '@/Store/Slices/FavoritesSlice'
+import { IPlace } from '@/Types/Types'
 import { useDispatch, useSelector } from 'react-redux'
 
 const usePlace = (placeDetails: IPlace | null) => {
@@ -23,6 +24,7 @@ const usePlace = (placeDetails: IPlace | null) => {
 
 			if (!isInFavorites) {
 				dispatch(addPlace(placeDetails))
+				saveDataToFirebase(placeDetails)
 			} else {
 				dispatch(removePlace(placeDetails.id))
 			}

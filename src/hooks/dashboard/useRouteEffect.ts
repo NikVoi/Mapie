@@ -3,7 +3,7 @@ import {
 	setDuration,
 	setIsWindowOpen,
 	setRoute,
-} from '@/store/slices/distanceSlice'
+} from '@/Store/Slices/DistanceSlice'
 import { MutableRefObject, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 

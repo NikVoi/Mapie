@@ -1,4 +1,4 @@
-import { selectPlace } from '@/store/slices/placeSlice'
+import { selectPlace } from '@/Store/Slices/PlaceSlice'
 import { useDispatch } from 'react-redux'
 
 interface Autocomplete {

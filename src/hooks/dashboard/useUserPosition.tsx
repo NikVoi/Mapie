@@ -1,4 +1,4 @@
-import { IPosition } from '@/types/types'
+import { IPosition } from '@/types/Types'
 import { useEffect, useState } from 'react'
 import { IUserPositionProps } from './types'
 

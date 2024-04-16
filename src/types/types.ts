@@ -16,6 +16,7 @@ export interface IPlace {
 	types: string[]
 	location: ILocation
 	formattedAddress: string
+	collectionID?: string
 }
 
 interface IPhotos {

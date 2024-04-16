@@ -7,9 +7,9 @@ import {
 	toggleFavorites,
 	toggleProfile,
 	toggleSearch,
-} from '@/store/slices/dashboardSlice'
+} from '@/Store/Slices/DashboardSlice'
 
-import { RootState } from '@/store/store'
+import { RootState } from '@/Store/Store'
 import SideButton from '../UI/SideButton/SideButton'
 import styles from './SideBar.module.scss'
 

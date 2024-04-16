@@ -1,7 +1,7 @@
 .form {
-	@apply flex flex-col;
+  @apply flex flex-col;
 
-	& > * {
-		@apply mb-10;
-	}
+  & > * {
+    @apply mb-10;
+  }
 }

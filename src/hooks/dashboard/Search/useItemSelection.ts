@@ -1,4 +1,4 @@
-import { setTypes } from '@/store/slices/radiusSlice'
+import { setTypes } from '@/Store/Slices/RadiusSlice'
 import { useDispatch } from 'react-redux'
 
 const useItemSelection = () => {

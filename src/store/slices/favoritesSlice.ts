@@ -1,7 +1,7 @@
-import { IPlace } from '@/types/types'
+import { IPlace } from '@/Types/Types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { RootState } from '../store'
-import { IFavoritesState } from './types'
+import { RootState } from '../Store'
+import { IFavoritesState } from './Types'
 
 const initialState: IFavoritesState = {
 	places: JSON.parse(localStorage.getItem('favorites') || '[]'),

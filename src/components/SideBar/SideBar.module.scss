@@ -1,26 +1,26 @@
 .SideBar {
-	@apply relative z-50 flex flex-col justify-between items-center w-32 h-full p-4 border-r-2 border-solid border-gray-400 bg-white
+  @apply relative z-50 flex flex-col justify-between items-center w-32 h-full p-4 border-r-2 border-solid border-gray-400 bg-white
 	max-md:w-28;
 }
 
 .logo {
-	@apply size-16 max-md:size-12;
+  @apply size-16 max-md:size-12;
 }
 
 .wrapper {
-	& button {
-		@apply flex-1 first:mb-5;
-	}
+  & button {
+    @apply flex-1 first:mb-5;
+  }
 }
 
 .avatar {
-	@apply w-16 h-16 rounded-full cursor-pointer;
+  @apply w-16 h-16 rounded-full cursor-pointer;
 
-	& svg {
-		@apply w-full h-full;
-	}
+  & svg {
+    @apply w-full h-full;
+  }
 
-	& img {
-		@apply w-full h-full;
-	}
+  & img {
+    @apply w-full h-full;
+  }
 }

@@ -2,8 +2,8 @@ import { signInWithPopup } from 'firebase/auth'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { auth, googleProvider } from '@/API/firebase'
-import { login } from '@store/slices/authSlice'
+import { auth, googleProvider } from '@/API/Firebase'
+import { login } from '@/Store/Slices/AuthSlice'
 
 const useLogInWithGoogle = () => {
 	const dispatch = useDispatch()

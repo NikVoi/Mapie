@@ -1,6 +1,6 @@
 import { FC, memo } from 'react'
 
-import Input from '@/components/UI/Input/Input'
+import Input from '@/Components/UI/Input/Input'
 import styles from './AuthForm.module.scss'
 import { IProps } from './AuthForm.type'
 

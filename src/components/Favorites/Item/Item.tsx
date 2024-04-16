@@ -1,44 +1,45 @@
 import { useCallback } from 'react'
 import { FaBookmark } from 'react-icons/fa6'
 import { MdPlayArrow } from 'react-icons/md'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
-import { setPlaceDetails } from '@/store/slices/Place/placeDetailsSlice'
-import { setFavoritesOpen, setPlaceOpen } from '@/store/slices/dashboardSlice'
-import {
-	addPlace,
-	removePlace,
-	selectFavorites,
-} from '@/store/slices/favoritesSlice'
+import { setFavoritesOpen, setPlaceOpen } from '@/Store/Slices/DashboardSlice'
+import { setPlaceDetails } from '@/Store/Slices/Place/PlaceDetailsSlice'
 
-import MainButton from '@/components/UI/MainButton/MainButton'
-import placeholder from '@assets/img-placeholder.png'
+import MainButton from '@/Components/UI/MainButton/MainButton'
+import placeholder from '@Assets/img-placeholder.png'
 
-import { IItemProps } from '../types'
+import { removeDataFromFirebase } from '@/API/Firebase'
+import { IItemProps } from '../Types'
 import styles from './Item.module.scss'
 
-const Item = ({ placeDetails }: IItemProps) => {
+const Item = ({ placeDetails, onRemove }: IItemProps) => {
 	const dispatch = useDispatch()
 
-	const favorites = useSelector(selectFavorites)
-
-	const { displayName, editorialSummary, photos, id } = placeDetails || {}
-
-	const isFavorite = id && favorites.some(favorite => favorite.id === id)
+	const { displayName, editorialSummary, photos } = placeDetails || {}
 
 	const handleOpenPlaceDetails = useCallback(() => {
 		dispatch(setPlaceOpen(true))
 		dispatch(setFavoritesOpen(false))
-		setPlaceDetails(placeDetails)
+		dispatch(setPlaceDetails(placeDetails))
 	}, [dispatch, placeDetails])
 
-	const toggleFavorite = useCallback(() => {
-		if (!isFavorite) {
-			dispatch(addPlace(placeDetails))
+	const handleRemoveItem = () => {
+		if (placeDetails.collectionID) {
+			removeDataFromFirebase(placeDetails.collectionID)
+				.then(() => {
+					console.log('Item removed successfully!')
+					if (onRemove) {
+						onRemove(placeDetails)
+					}
+				})
+				.catch(error => {
+					console.error('Error removing item:', error)
+				})
 		} else {
-			dispatch(removePlace(placeDetails.id))
+			console.error('collectionID is undefined or null')
 		}
-	}, [dispatch, placeDetails, isFavorite])
+	}
 
 	const imageUrl =
 		photos && photos.length > 0
@@ -62,7 +63,7 @@ const Item = ({ placeDetails }: IItemProps) => {
 			</div>
 
 			<div className={styles.buttons}>
-				<MainButton onClick={toggleFavorite} svg={<FaBookmark />} />
+				<MainButton onClick={handleRemoveItem} svg={<FaBookmark />} />
 				<MainButton onClick={handleOpenPlaceDetails} svg={<MdPlayArrow />} />
 			</div>
 		</div>

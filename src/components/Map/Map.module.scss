@@ -1,9 +1,9 @@
 .wrapper {
-	& button {
-		@apply absolute bottom-9 right-28 z-20 size-16 bg-white;
+  & button {
+    @apply absolute bottom-9 right-28 z-20 size-16 bg-white;
 
-		& svg {
-			@apply size-10 text-gray-600 hover:text-gray-400 duration-200;
-		}
-	}
+    & svg {
+      @apply size-10 text-gray-600 hover:text-gray-400 duration-200;
+    }
+  }
 }

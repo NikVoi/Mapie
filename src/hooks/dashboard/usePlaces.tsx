@@ -1,6 +1,6 @@
 import { fetchPlaces } from '@/API/PlacesAPI'
-import { RootState } from '@/store/store'
-import { IPosition } from '@/types/types'
+import { RootState } from '@/Store/Store'
+import { IPosition } from '@/types/Types'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { ILocation, IPlacesLNG } from './types'

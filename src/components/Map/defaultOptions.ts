@@ -1,4 +1,4 @@
-import { defaultTheme } from './defaultTheme'
+import { defaultTheme } from './DefaultTheme'
 
 export const defaultOptions = {
 	panControl: true,

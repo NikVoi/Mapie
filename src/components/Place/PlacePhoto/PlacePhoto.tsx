@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import placeholder from '@assets/img-placeholder.png'
+import placeholder from '@Assets/img-placeholder.png'
 
 import styles from '../Place.module.scss'
 import { IPlacePhotoProps } from '../types'

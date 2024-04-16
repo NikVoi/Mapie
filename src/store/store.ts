@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import placeDetailsReducer from './slices/Place/placeDetailsSlice'
-import authReducer, { login } from './slices/authSlice'
-import dashboardReducer from './slices/dashboardSlice'
-import distanceReducer from './slices/distanceSlice'
-import favoritesReducer from './slices/favoritesSlice'
-import placeReducer from './slices/placeSlice'
-import radiusReducer from './slices/radiusSlice'
+import authReducer, { login } from './Slices/AuthSlice'
+import dashboardReducer from './Slices/DashboardSlice'
+import distanceReducer from './Slices/DistanceSlice'
+import favoritesReducer from './Slices/FavoritesSlice'
+import placeDetailsReducer from './Slices/Place/PlaceDetailsSlice'
+import placeReducer from './Slices/PlaceSlice'
+import radiusReducer from './Slices/RadiusSlice'
 
 export const store = configureStore({
 	reducer: {

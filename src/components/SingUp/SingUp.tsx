@@ -1,15 +1,15 @@
 import { useCallback } from 'react'
 import { Link } from 'react-router-dom'
 
-import useSignUpWithEmailAndPassword from '@/hooks//auth/useSignUpWithEmailAndPassword'
-import useAuthenticationRedirect from '@/hooks/auth/useAuthRedirect'
-import useLogInWithGoogle from '@/hooks/auth/useLogInWithGoogle'
-import useUserData from '@/hooks/auth/useUserData'
+import useAuthenticationRedirect from '@/Hooks/auth/UseAuthRedirect'
+import useLogInWithGoogle from '@/Hooks/auth/UseLogInWithGoogle'
+import useSignUpWithEmailAndPassword from '@/Hooks/auth/UseSignUpWithEmailAndPassword'
+import useUserData from '@/Hooks/auth/UseUserData'
 
-import AuthForm from '@/components/AuthForm/AuthForm'
-import CustomAlert from '@/components/CustomAlert/CustomAlert'
-import Button from '@/components/UI/Button/Button'
-import ButtonGoogle from '@/components/UI/ButtonGoogle/ButtonGoogle'
+import AuthForm from '@/Components/AuthForm/AuthForm'
+import CustomAlert from '@/Components/CustomAlert/CustomAlert'
+import Button from '@/Components/UI/Button/Button'
+import ButtonGoogle from '@/Components/UI/ButtonGoogle/ButtonGoogle'
 
 import styles from './SingUp.module.scss'
 

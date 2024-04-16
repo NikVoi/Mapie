@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Navigate } from 'react-router-dom'
 
-import useLoader from '@/hooks/useLoader'
+import useLoader from '@/Hooks/useLoader'
 
 import Favorites from '../Favorites/Favorites'
 import Map from '../Map/Map'

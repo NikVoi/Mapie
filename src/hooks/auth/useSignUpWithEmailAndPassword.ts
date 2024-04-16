@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 
-import { auth } from '@/API/firebase'
-import { IProps } from './auth.type'
+import { auth } from '@/API/Firebase'
+import { IProps } from './Auth.type'
 
 const useSignUpWithEmailAndPassword = () => {
 	const signUpWithEmailAndPassword = async ({

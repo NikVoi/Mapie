@@ -1,5 +1,5 @@
-import { RootState } from '@/store/store'
-import { IPlace } from '@/types/types'
+import { RootState } from '@/Store/Store'
+import { IPlace } from '@/Types/Types'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 const placeDetailsSlice = createSlice({

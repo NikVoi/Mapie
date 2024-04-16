@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { IUserData } from './auth.type'
+import { IUserData } from './Auth.type'
 
 const useUserData = (): [IUserData, (data: Partial<IUserData>) => void] => {
 	const [userData, setUserData] = useState<IUserData>({

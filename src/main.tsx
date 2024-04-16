@@ -3,10 +3,10 @@ import * as ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { RouterProvider } from 'react-router-dom'
 
-import { store } from '@store/store'
-import { router } from './routes'
+import { store } from '@/Store/Store'
 
-import './global.scss'
+import './Global.scss'
+import { router } from './Routes'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>

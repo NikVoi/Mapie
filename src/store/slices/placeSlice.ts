@@ -1,4 +1,4 @@
-import { RootState } from '@/store/store'
+import { RootState } from '@/Store/Store'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 interface PlaceState {

@@ -1,58 +1,58 @@
 .modal {
-	@apply absolute bottom-10 right-10 rounded-2xl bg-white p-10 overflow-hidden;
+  @apply absolute bottom-10 right-10 rounded-2xl bg-white p-10 overflow-hidden;
 
-	transform: translateX(calc(100% + 30px));
-	transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
+  transform: translateX(calc(100% + 30px));
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
 
-	&.active {
-		transform: translateX(0%);
-	}
+  &.active {
+    transform: translateX(0%);
+  }
 }
 
 .modal .content {
-	@apply flex justify-center items-center;
+  @apply flex justify-center items-center;
 }
 
 .info {
-	@apply flex justify-center items-center size-14 text-white;
+  @apply flex justify-center items-center size-14 text-white;
 
-	& .success {
-		@apply bg-green-400 size-14 rounded-full p-2;
-	}
+  & .success {
+    @apply bg-green-400 size-14 rounded-full p-2;
+  }
 
-	& .warning {
-		@apply bg-yellow-400 size-14 rounded-full p-2;
-	}
+  & .warning {
+    @apply bg-yellow-400 size-14 rounded-full p-2;
+  }
 
-	& .error {
-		@apply bg-red-600 size-14 rounded-full p-2;
-	}
+  & .error {
+    @apply bg-red-600 size-14 rounded-full p-2;
+  }
 }
 
 .message {
-	@apply flex flex-col text-2xl ml-7 mr-0 w-80;
+  @apply flex flex-col text-2xl ml-7 mr-0 w-80;
 
-	& span {
-		@apply first:font-bold font-medium;
-	}
+  & span {
+    @apply first:font-bold font-medium;
+  }
 }
 
 .close {
-	@apply absolute top-2 right-3 p-2 cursor-pointer opacity-70 hover:opacity-100;
+  @apply absolute top-2 right-3 p-2 cursor-pointer opacity-70 hover:opacity-100;
 }
 
 .progress {
-	@apply absolute bottom-0 left-0 h-2 w-full before:content-[''] before:absolute before:bottom-0 before:right-0 before:h-full before:w-full before:bg-blue-500;
+  @apply absolute bottom-0 left-0 h-2 w-full before:content-[''] before:absolute before:bottom-0 before:right-0 before:h-full before:w-full before:bg-blue-500;
 
-	&.active {
-		&::before {
-			animation: progress 5s linear forwards;
-		}
-	}
+  &.active {
+    &::before {
+      animation: progress 5s linear forwards;
+    }
+  }
 }
 
 @keyframes progress {
-	100% {
-		right: 100%;
-	}
+  100% {
+    right: 100%;
+  }
 }

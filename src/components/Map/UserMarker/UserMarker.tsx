@@ -1,4 +1,4 @@
-import { IPosition } from '@/types/types'
+import { IPosition } from '@/types/Types'
 import { Marker } from '@react-google-maps/api'
 
 const UserMarker = ({ userPosition }: { userPosition: IPosition }) => (

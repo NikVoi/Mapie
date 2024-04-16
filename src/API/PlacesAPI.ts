@@ -1,4 +1,4 @@
-import { IPosition } from '@/types/types'
+import { IPosition } from '@/types/Types'
 import axios, { AxiosResponse } from 'axios'
 const { VITE_PLACES_API } = import.meta.env
 

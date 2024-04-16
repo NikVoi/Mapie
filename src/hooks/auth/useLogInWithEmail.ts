@@ -2,9 +2,9 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { auth } from '@/API/firebase'
-import { IProps } from '@hooks/auth/auth.type'
-import { login } from '@store/slices/authSlice'
+import { auth } from '@/API/Firebase'
+import { IProps } from '@/Hooks/auth/Auth.type'
+import { login } from '@/Store/Slices/AuthSlice'
 
 const useSingInWithEmail = () => {
 	const dispatch = useDispatch()

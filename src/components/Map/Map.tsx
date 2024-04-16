@@ -3,23 +3,24 @@ import { LocateFixed } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import { useMapCenterEffect } from '@/hooks/dashboard/useMapCenterEffect'
-import { usePlaces } from '@/hooks/dashboard/usePlaces'
-import { useRouteEffect } from '@/hooks/dashboard/useRouteEffect'
-import { useUserPosition } from '@/hooks/dashboard/useUserPosition'
-import { selectSelectedPlace } from '@/store/slices/placeSlice'
-import { RootState } from '@/store/store'
+import { useMapCenterEffect } from '@/Hooks/dashboard/useMapCenterEffect'
+import { usePlaces } from '@/Hooks/dashboard/usePlaces'
+import { useRouteEffect } from '@/Hooks/dashboard/useRouteEffect'
+import { useUserPosition } from '@/Hooks/dashboard/useUserPosition'
+import { selectSelectedPlace } from '@/Store/Slices/PlaceSlice'
+import { RootState } from '@/Store/Store'
 
-import MainButton from '../UI/MainButton/MainButton'
+import MainButton from '@Components/UI/MainButton/MainButton'
+
 import RenderPlaceMarkers from './RenderPlaceMarkers/RenderPlaceMarkers'
 import UserMarker from './UserMarker/UserMarker'
-import { defaultOptions } from './defaultOptions'
 import {
 	googleMapsLoader,
 	useCircleRedraw,
 	useHandleMarkerClick,
-} from './utils'
+} from './Utils'
 
+import { defaultOptions } from './DefaultOptions'
 import styles from './Map.module.scss'
 
 const { VITE_GOOGLE_KEY } = import.meta.env
@@ -31,6 +32,8 @@ interface PlaceProps {
 const Map = ({ destination }: PlaceProps) => {
 	const { isLoaded } = googleMapsLoader(VITE_GOOGLE_KEY)
 	const mapRef = useRef<google.maps.Map | null>(null)
+	const circleRef = useRef<any>(null)
+	const polylineRef = useRef<any>(null)
 
 	const radius = useSelector(
 		(state: RootState) => state.radiusSlice.radiusSlice
@@ -55,11 +58,7 @@ const Map = ({ destination }: PlaceProps) => {
 	const handleMarkerClick = useHandleMarkerClick()
 	useMapCenterEffect(selectedPlace, setMapCenter)
 
-	const circleRef = useRef<any>(null)
-	const polylineRef = useRef<any>(null)
-
 	useCircleRedraw({ circleRef, userPosition, mapRef, radius })
-
 	useRouteEffect(destination, userPosition, polylineRef)
 
 	useEffect(() => {

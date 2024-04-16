@@ -1,6 +1,6 @@
-import { fetchPlaceDetails } from '@/hooks/dashboard/usePlaceDetails'
-import { setPlaceDetails } from '@/store/slices/Place/placeDetailsSlice'
-import { togglePlace } from '@/store/slices/dashboardSlice'
+import { fetchPlaceDetails } from '@/Hooks/dashboard/usePlaceDetails'
+import { togglePlace } from '@/Store/Slices/DashboardSlice'
+import { setPlaceDetails } from '@/Store/Slices/Place/PlaceDetailsSlice'
 import { useJsApiLoader } from '@react-google-maps/api'
 import { MutableRefObject, RefObject, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
@@ -21,6 +21,7 @@ export const useHandleMarkerClick = () => {
 
 	const handleMarkerClick = async (placeId: string) => {
 		const details = await fetchPlaceDetails(placeId, VITE_GOOGLE_KEY)
+
 		dispatch(setPlaceDetails(details))
 		dispatch(togglePlace())
 	}

@@ -1,4 +1,4 @@
-import { IPlace } from '@/types/types'
+import { IPlace } from '@/Types/Types'
 
 export interface IAuth {
 	isAuthenticated: boolean

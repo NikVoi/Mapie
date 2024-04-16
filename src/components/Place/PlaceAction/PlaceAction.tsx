@@ -3,7 +3,7 @@ import { MapPin } from 'lucide-react'
 import { FC } from 'react'
 import { FaBookmark } from 'react-icons/fa6'
 
-import MainButton from '@/components/UI/MainButton/MainButton'
+import MainButton from '@/Components/UI/MainButton/MainButton'
 
 import { IPlaceActionsProps } from '../types'
 

@@ -3,17 +3,17 @@ import { ChevronLeft } from 'lucide-react'
 import { FC, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { RootState } from '@/store/store'
+import { RootState } from '@/Store/Store'
 
-import MainButton from '@components/UI/MainButton/MainButton'
+import MainButton from '@Components/UI/MainButton/MainButton'
 import styles from './Place.module.scss'
 import PlaceActions from './PlaceAction/PlaceAction'
 import PlaceDetails from './PlaceDetails/PlaceDetails'
 import PlacePhoto from './PlacePhoto/PlacePhoto'
 
-import usePlace from '@/hooks/Place/usePlace'
-import { selectPlaceDetails } from '@/store/slices/Place/placeDetailsSlice'
-import { setPlaceOpen, toggleFavorites } from '@/store/slices/dashboardSlice'
+import usePlace from '@/Hooks/Place/UsePlace'
+import { setPlaceOpen, toggleFavorites } from '@/Store/Slices/DashboardSlice'
+import { selectPlaceDetails } from '@/Store/Slices/Place/PlaceDetailsSlice'
 import { IPlaceProps } from './types'
 
 const Place: FC<IPlaceProps> = ({ onClick }) => {

@@ -4,8 +4,8 @@ import {
 	setDistance,
 	setDuration,
 	setIsWindowOpen,
-} from '@/store/slices/distanceSlice'
-import { RootState } from '@/store/store'
+} from '@/Store/Slices/DistanceSlice'
+import { RootState } from '@/Store/Store'
 import { IoClose } from 'react-icons/io5'
 import { useDispatch, useSelector } from 'react-redux'
 import MainButton from '../UI/MainButton/MainButton'

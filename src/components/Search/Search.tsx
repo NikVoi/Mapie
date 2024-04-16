@@ -3,18 +3,18 @@ import classNames from 'classnames'
 import { ChevronLeft } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import useAutocomplete from '@/hooks/dashboard/Search/useAutocomplete'
-import useItemSelection from '@/hooks/dashboard/Search/useItemSelection'
-import useRadiusInput from '@/hooks/dashboard/Search/useRadiusInput'
+import useAutocomplete from '@/Hooks/dashboard/Search/useAutocomplete'
+import useItemSelection from '@/Hooks/dashboard/Search/useItemSelection'
+import useRadiusInput from '@/Hooks/dashboard/Search/useRadiusInput'
 
-import { toggleSearch } from '@/store/slices/dashboardSlice'
-import { RootState } from '@/store/store'
+import { toggleSearch } from '@/Store/Slices/DashboardSlice'
+import { RootState } from '@/Store/Store'
 
-import usePlaceSelection from '@/hooks/dashboard/Search/usePlaceSelection'
+import usePlaceSelection from '@/Hooks/dashboard/Search/usePlaceSelection'
 import Input from '../UI/Input/Input'
 import Item from './Item/Item'
+import { data } from './Search.data'
 import styles from './Search.module.scss'
-import { data } from './search.data'
 
 const Search = () => {
 	const dispatch = useDispatch()
