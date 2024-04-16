@@ -1,6 +1,7 @@
 import { Autocomplete } from '@react-google-maps/api'
 import classNames from 'classnames'
 import { ChevronLeft } from 'lucide-react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import useAutocomplete from '@/Hooks/dashboard/Search/useAutocomplete'
@@ -29,6 +30,12 @@ const Search = () => {
 	const { inputValue, handleChange } = useRadiusInput()
 	const { handlePlaceSelect } = usePlaceSelection(autocomplete)
 
+	const [activeItem, setActiveItem] = useState<string | null>(null)
+
+	const handleItemSelect = (itemName: string) => {
+		setActiveItem(itemName === activeItem ? null : itemName)
+	}
+
 	return (
 		<section
 			className={classNames(styles.search, {
@@ -50,7 +57,11 @@ const Search = () => {
 							key={item.id}
 							name={item.name}
 							img={item.img}
-							onClick={() => handleItemClick(item)}
+							onClick={() => {
+								handleItemClick(item)
+								handleItemSelect(item.name)
+							}}
+							isActive={item.name === activeItem}
 						/>
 					))}
 				</div>

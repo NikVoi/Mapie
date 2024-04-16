@@ -1,6 +1,6 @@
-import { IPosition } from '@/types/Types'
+import { IPosition } from '@/Types/Types'
 import { useEffect, useState } from 'react'
-import { IUserPositionProps } from './types'
+import { IUserPositionProps } from './Types'
 
 export const useUserPosition = ({ setMapCenter }: IUserPositionProps) => {
 	const [userPosition, setUserPosition] = useState<IPosition | null>(null)

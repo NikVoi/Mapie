@@ -51,6 +51,7 @@ const Map = ({ destination }: PlaceProps) => {
 	})
 
 	const { userPosition, getUserPosition } = useUserPosition({ setMapCenter })
+
 	const places = usePlaces({
 		lat: userPosition?.lat || 53.9007,
 		lng: userPosition?.lng || 27.5709,

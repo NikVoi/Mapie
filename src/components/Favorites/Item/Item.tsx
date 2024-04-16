@@ -9,7 +9,7 @@ import { setPlaceDetails } from '@/Store/Slices/Place/PlaceDetailsSlice'
 import MainButton from '@/Components/UI/MainButton/MainButton'
 import placeholder from '@Assets/img-placeholder.png'
 
-import { removeDataFromFirebase } from '@/API/Firebase'
+import { removeDataFromFirebase } from '@/API/FirebaseActions'
 import { IItemProps } from '../Types'
 import styles from './Item.module.scss'
 

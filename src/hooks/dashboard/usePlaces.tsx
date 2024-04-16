@@ -1,14 +1,14 @@
 import { fetchPlaces } from '@/API/PlacesAPI'
 import { RootState } from '@/Store/Store'
-import { IPosition } from '@/types/Types'
+import { IPlace, IPosition } from '@/Types/Types'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { ILocation, IPlacesLNG } from './types'
+import { IPlacesLNG } from './Types'
 
 const { VITE_GOOGLE_KEY } = import.meta.env
 
 export const usePlaces = ({ lat, lng }: IPosition) => {
-	const [places, setPlaces] = useState<ILocation[]>([])
+	const [places, setPlaces] = useState<IPlace[]>([])
 	const radius = useSelector(
 		(state: RootState) => state.radiusSlice.radiusSlice
 	)
@@ -24,7 +24,8 @@ export const usePlaces = ({ lat, lng }: IPosition) => {
 					apiKey,
 					types,
 				})
-				const filteredPlaces = placesData.filter((place: IPlacesLNG) =>
+
+				const filteredPlaces = placesData.filter((place: any) =>
 					isPlaceInsideCircle(place, lat, lng, radius)
 				)
 

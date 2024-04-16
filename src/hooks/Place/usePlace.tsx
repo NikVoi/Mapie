@@ -1,4 +1,4 @@
-import { saveDataToFirebase } from '@/API/Firebase'
+import { saveDataToFirebase } from '@/API/FirebaseActions'
 import {
 	addPlace,
 	removePlace,

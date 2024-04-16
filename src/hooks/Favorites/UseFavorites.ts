@@ -1,5 +1,5 @@
-import { getAllFavorites } from '@/API/Firebase'
-import { IPlace } from '@/types/Types'
+import { getAllFavorites } from '@/API/FirebaseActions'
+import { IPlace } from '@/Types/Types'
 import { useEffect, useState } from 'react'
 
 export const useFavorites = () => {

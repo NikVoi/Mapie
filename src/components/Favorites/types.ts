@@ -1,4 +1,4 @@
-import { IPlace } from '@/types/Types'
+import { IPlace } from '@/Types/Types'
 
 export interface IItemProps {
 	placeDetails: IPlace
