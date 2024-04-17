@@ -11,7 +11,6 @@ const usePlaceSelection = (autocomplete: Autocomplete | null) => {
 	const handlePlaceSelect = () => {
 		if (autocomplete !== null) {
 			const place = autocomplete.getPlace()
-			console.log('Выбранное место:', place)
 			dispatch(selectPlace(place))
 		}
 	}

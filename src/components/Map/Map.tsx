@@ -20,6 +20,7 @@ import {
 	useHandleMarkerClick,
 } from './Utils'
 
+import { DEFAULT_LATITUDE, DEFAULT_LONGITUDE } from '@/Constant/Position'
 import { defaultOptions } from './DefaultOptions'
 import styles from './Map.module.scss'
 
@@ -31,6 +32,7 @@ interface PlaceProps {
 
 const Map = ({ destination }: PlaceProps) => {
 	const { isLoaded } = googleMapsLoader(VITE_GOOGLE_KEY)
+
 	const mapRef = useRef<google.maps.Map | null>(null)
 	const circleRef = useRef<any>(null)
 	const polylineRef = useRef<any>(null)
@@ -41,21 +43,18 @@ const Map = ({ destination }: PlaceProps) => {
 	const route = useSelector((state: RootState) => state.distance.route)
 	const selectedPlace = useSelector(selectSelectedPlace)
 
-	const isWindowOpen = useSelector(
-		(state: RootState) => state.distance.isWindowOpen
-	)
-
 	const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({
-		lat: 53.9007,
-		lng: 27.5709,
+		lat: DEFAULT_LATITUDE,
+		lng: DEFAULT_LONGITUDE,
 	})
 
 	const { userPosition, getUserPosition } = useUserPosition({ setMapCenter })
 
 	const places = usePlaces({
-		lat: userPosition?.lat || 53.9007,
-		lng: userPosition?.lng || 27.5709,
+		lat: userPosition?.lat || DEFAULT_LATITUDE,
+		lng: userPosition?.lng || DEFAULT_LONGITUDE,
 	})
+
 	const handleMarkerClick = useHandleMarkerClick()
 	useMapCenterEffect(selectedPlace, setMapCenter)
 
@@ -68,7 +67,7 @@ const Map = ({ destination }: PlaceProps) => {
 			polylineRef.current = null
 		}
 
-		if (isWindowOpen && route) {
+		if (route) {
 			const newPolyline = new google.maps.Polyline({
 				path: route.overview_path,
 				strokeColor: '#FF0000',
@@ -78,7 +77,7 @@ const Map = ({ destination }: PlaceProps) => {
 			})
 			polylineRef.current = newPolyline
 		}
-	}, [isWindowOpen, route])
+	}, [route])
 
 	return isLoaded ? (
 		<GoogleMap

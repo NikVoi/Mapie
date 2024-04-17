@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { auth } from '@/API/Firebase'
-import { IProps } from '@/Hooks/Auth/Auth.type'
 import { login } from '@/Store/Slices/AuthSlice'
+import { IProps } from '@Hooks/Auth/Auth.type'
 
 const useSingInWithEmail = () => {
 	const dispatch = useDispatch()

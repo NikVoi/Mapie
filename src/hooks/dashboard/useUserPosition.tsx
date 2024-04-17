@@ -20,6 +20,11 @@ export const useUserPosition = ({ setMapCenter }: IUserPositionProps) => {
 		)
 	}
 
+	const setNewPosition = (newPosition: IPosition) => {
+		setUserPosition(newPosition)
+		setMapCenter(newPosition)
+	}
+
 	useEffect(() => {
 		if (navigator.geolocation) {
 			getUserPosition()
@@ -28,5 +33,5 @@ export const useUserPosition = ({ setMapCenter }: IUserPositionProps) => {
 		}
 	}, [])
 
-	return { userPosition, getUserPosition }
+	return { userPosition, getUserPosition, setNewPosition }
 }
