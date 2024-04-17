@@ -33,6 +33,6 @@
 			"@API/*": ["src/API/*"]
 		}
 	},
-	"include": ["src", "src/Components/Search/Search.data.ts"],
+	"include": ["src", "src/Components/Search/Search.data.ts", "@types.ts"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -9,6 +9,7 @@ import Profile from '../Profile/Profile'
 import Search from '../Search/Search'
 import SideBar from '../SideBar/SideBar'
 
+import { PATH_TO_MAIN } from '@/Constant/Routes'
 import Loader from '../Loader/Loader'
 import Place from '../Place/Place'
 import Road from '../Road/Road'
@@ -31,7 +32,7 @@ const Dashboard = () => {
 	}
 
 	if (!isAuthenticated) {
-		return <Navigate to='/' />
+		return <Navigate to={`${PATH_TO_MAIN}`} />
 	}
 
 	return (

@@ -1,13 +1,15 @@
 import { Circle, GoogleMap, Marker, Polyline } from '@react-google-maps/api'
 import { LocateFixed } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { useMapCenterEffect } from '@/Hooks/Dashboard/useMapCenterEffect'
-import { usePlaces } from '@/Hooks/Dashboard/usePlaces'
 import { useRouteEffect } from '@/Hooks/Dashboard/useRouteEffect'
 import { useUserPosition } from '@/Hooks/Dashboard/useUserPosition'
-import { selectSelectedPlace } from '@/Store/Slices/PlaceSlice'
+import {
+	clearSelectedPlace,
+	selectSelectedPlace,
+} from '@/Store/Slices/PlaceSlice'
 import { RootState } from '@/Store/Store'
 
 import MainButton from '@Components/UI/MainButton/MainButton'
@@ -21,6 +23,7 @@ import {
 } from './Utils'
 
 import { DEFAULT_LATITUDE, DEFAULT_LONGITUDE } from '@/Constant/Position'
+import { usePlaces } from '@/Hooks/Dashboard/usePlaces'
 import { defaultOptions } from './DefaultOptions'
 import styles from './Map.module.scss'
 
@@ -31,7 +34,10 @@ interface PlaceProps {
 }
 
 const Map = ({ destination }: PlaceProps) => {
+	const dispatch = useDispatch()
 	const { isLoaded } = googleMapsLoader(VITE_GOOGLE_KEY)
+
+	const [isPolylineRendered, setIsPolylineRendered] = useState(false)
 
 	const mapRef = useRef<google.maps.Map | null>(null)
 	const circleRef = useRef<any>(null)
@@ -50,34 +56,61 @@ const Map = ({ destination }: PlaceProps) => {
 
 	const { userPosition, getUserPosition } = useUserPosition({ setMapCenter })
 
-	const places = usePlaces({
-		lat: userPosition?.lat || DEFAULT_LATITUDE,
-		lng: userPosition?.lng || DEFAULT_LONGITUDE,
-	})
+	const [mainPos, setMainPos] = useState<{
+		lat: number
+		lng: number
+	} | null>(null)
+
+	useEffect(() => {
+		if (userPosition !== null) {
+			setMainPos({
+				lat: userPosition.lat,
+				lng: userPosition.lng,
+			})
+		}
+	}, [userPosition])
 
 	const handleMarkerClick = useHandleMarkerClick()
 	useMapCenterEffect(selectedPlace, setMapCenter)
 
-	useCircleRedraw({ circleRef, userPosition, mapRef, radius })
-	useRouteEffect(destination, userPosition, polylineRef)
+	const { redrawWithNewPosition, drawCircle } = useCircleRedraw({
+		circleRef,
+		mapRef,
+		position: userPosition,
+		radius,
+	})
+
+	const places = usePlaces({
+		lat: mainPos?.lat || DEFAULT_LATITUDE,
+		lng: mainPos?.lng || DEFAULT_LONGITUDE,
+	})
 
 	useEffect(() => {
-		if (polylineRef.current && polylineRef.current.setMap) {
-			polylineRef.current.setMap(null)
-			polylineRef.current = null
-		}
-
-		if (route) {
-			const newPolyline = new google.maps.Polyline({
-				path: route.overview_path,
-				strokeColor: '#FF0000',
-				strokeOpacity: 1,
-				strokeWeight: 2,
-				map: mapRef.current,
+		if (userPosition !== null) {
+			setMainPos({
+				lat: userPosition.lat,
+				lng: userPosition.lng,
 			})
-			polylineRef.current = newPolyline
 		}
-	}, [route])
+	}, [userPosition])
+
+	useEffect(() => {
+		if (selectedPlace) {
+			setMainPos({
+				lat: selectedPlace.location.lat,
+				lng: selectedPlace.location.lng,
+			})
+		}
+	}, [selectedPlace])
+
+	useRouteEffect(
+		destination,
+		userPosition,
+		polylineRef,
+		mapRef,
+		setIsPolylineRendered,
+		route
+	)
 
 	return isLoaded ? (
 		<GoogleMap
@@ -90,32 +123,37 @@ const Map = ({ destination }: PlaceProps) => {
 			}}
 		>
 			<div className={styles.wrapper}>
-				<MainButton svg={<LocateFixed />} onClick={getUserPosition} />
-			</div>
-
-			{selectedPlace && (
-				<Marker
-					position={{
-						lat: selectedPlace.location.lat,
-						lng: selectedPlace.location.lng,
-					}}
-					title={selectedPlace.name}
+				<MainButton
+					svg={<LocateFixed />}
 					onClick={() => {
-						handleMarkerClick(selectedPlace.place_id)
+						drawCircle(userPosition)
+						getUserPosition()
+						dispatch(clearSelectedPlace())
 					}}
 				/>
-			)}
+			</div>
 
-			{userPosition && (
+			<Circle ref={circleRef} />
+
+			{userPosition && <UserMarker userPosition={userPosition} />}
+
+			{selectedPlace && (
 				<>
-					<Circle ref={circleRef} />
-					<UserMarker userPosition={userPosition} />
+					{redrawWithNewPosition(selectedPlace.location)}
+
+					<Marker
+						position={{
+							lat: selectedPlace.location.lat,
+							lng: selectedPlace.location.lng,
+						}}
+						onClick={() => handleMarkerClick(selectedPlace.place_id)}
+					/>
 				</>
 			)}
 
 			{userPosition && <RenderPlaceMarkers places={places} />}
 
-			{route && <Polyline ref={polylineRef} />}
+			{isPolylineRendered || <Polyline ref={polylineRef} />}
 		</GoogleMap>
 	) : null
 }

@@ -11,10 +11,13 @@ const placeDetailsSlice = createSlice({
 		setPlaceDetails: (state, action: PayloadAction<IPlace | null>) => {
 			state.selectedPlace = action.payload
 		},
+		clearPlaceDetails: state => {
+			state.selectedPlace = null
+		},
 	},
 })
 
-export const { setPlaceDetails } = placeDetailsSlice.actions
+export const { setPlaceDetails, clearPlaceDetails } = placeDetailsSlice.actions
 export const selectPlaceDetails = (state: RootState) =>
 	state.placeDetails.selectedPlace
 export default placeDetailsSlice.reducer

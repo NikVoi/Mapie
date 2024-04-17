@@ -11,6 +11,7 @@ import CustomAlert from '@/Components/CustomAlert/CustomAlert'
 import Button from '@/Components/UI/Button/Button'
 import ButtonGoogle from '@/Components/UI/ButtonGoogle/ButtonGoogle'
 
+import { PATH_TO_DASHBOARD } from '@/Constant/Routes'
 import styles from './LogIn.module.scss'
 
 export default function LogIn() {
@@ -18,7 +19,7 @@ export default function LogIn() {
 	const { handleSingInWithEmail } = useSingInWithEmail()
 	const { handleLogInWithGoogle } = useLogInWithGoogle()
 	const redirectComponent = useAuthenticationRedirect({
-		authenticatedRedirectPath: '/dashboard',
+		authenticatedRedirectPath: `${PATH_TO_DASHBOARD}`,
 	})
 
 	if (redirectComponent) {
