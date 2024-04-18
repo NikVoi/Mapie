@@ -8,15 +8,15 @@ import { IPlace } from '@/Types/Types'
 import { useDispatch, useSelector } from 'react-redux'
 
 const usePlace = (placeDetails: IPlace | null) => {
-	const dispatch = useDispatch()
 	const favorites = useSelector(selectFavorites)
+	const dispatch = useDispatch()
 
 	const isPlaceInFavorites: boolean =
 		placeDetails && placeDetails.id
 			? favorites.some(favorite => favorite.id === placeDetails.id)
 			: false
 
-	const toggleFavorite = () => {
+	const toggleFavorite = async () => {
 		if (placeDetails) {
 			const isInFavorites = favorites.some(
 				favorite => favorite.id === placeDetails.id

@@ -1,20 +1,29 @@
 import { getAllFavorites } from '@/API/FirebaseActions'
+import {
+	addPlace,
+	clearPlaces,
+	removePlace,
+	selectFavorites,
+} from '@/Store/Slices/FavoritesSlice'
 import { IPlace } from '@/Types/Types'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 export const useFavorites = () => {
-	const [favorites, setFavorites] = useState<IPlace[]>([])
+	const dispatch = useDispatch()
+	const favorites = useSelector(selectFavorites)
 
 	useEffect(() => {
 		const fetchFavorites = async () => {
 			try {
 				const favoritesData = await getAllFavorites()
-				if (
-					Array.isArray(favoritesData) &&
-					favoritesData.length > 0 &&
-					'id' in favoritesData[0]
-				) {
-					setFavorites(favoritesData as IPlace[])
+
+				if (Array.isArray(favoritesData) && favoritesData.length > 0) {
+					dispatch(clearPlaces())
+
+					favoritesData.forEach((place: any) => {
+						dispatch(addPlace(place))
+					})
 				} else {
 					console.error('Invalid data format for favorites:', favoritesData)
 				}
@@ -24,17 +33,13 @@ export const useFavorites = () => {
 		}
 
 		fetchFavorites()
-	}, [])
+	}, [favorites])
 
-	const handleRemoveFavorite = (placeDetailsToRemove: IPlace) => {
-		const updatedFavorites = favorites.filter(
-			favorite => favorite !== placeDetailsToRemove
-		)
-		setFavorites(updatedFavorites)
+	const handleRemoveFavorite = (place: IPlace) => {
+		dispatch(removePlace(place.id))
 	}
 
 	return {
-		favorites,
 		handleRemoveFavorite,
 	}
 }

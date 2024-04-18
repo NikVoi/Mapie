@@ -1,87 +1,87 @@
 .place {
-  @apply absolute z-10 top-0 -left-36 flex items-center w-36 h-full duration-200 max-md:w-full;
-  transition: left 0.3s ease;
+	@apply absolute z-30 top-0 -left-36 flex items-center w-36 h-full duration-200 max-md:w-full;
+	transition: left 0.3s ease;
 
-  &.open {
-    @apply left-0;
-  }
+	&.open {
+		@apply left-0;
+	}
 }
 
 .wrapper {
-  @apply flex flex-col justify-start items-start w-full h-full p-6 bg-white;
+	@apply flex flex-col justify-start items-start w-full h-full p-6 bg-white;
 }
 
 .main {
-  @apply w-full border border-solid border-gray-400 rounded-2xl p-6;
+	@apply w-full border border-solid border-gray-400 rounded-2xl p-6;
 }
 
 .img {
-  @apply w-full h-64  rounded-2xl overflow-hidden mb-4;
+	@apply w-full h-64  rounded-2xl overflow-hidden mb-4;
 
-  & img {
-    @apply w-full h-full object-cover;
-  }
+	& img {
+		@apply w-full h-full object-cover;
+	}
 }
 
 .name {
-  @apply text-3xl font-semibold mb-4;
+	@apply text-3xl font-semibold mb-4;
 }
 
 .description {
-  @apply text-lg mb-4;
+	@apply text-lg mb-4;
 }
 
 .adress {
-  @apply text-lg mb-4;
+	@apply text-lg mb-4;
 }
 
 .actions {
-  @apply flex justify-between items-center;
+	@apply flex justify-between items-center;
 
-  & button {
-    @apply text-2xl w-52 first:bg-white first:text-gray-600   last:hover:bg-blue-400 max-md:text-xl items-center justify-center 
+	& button {
+		@apply text-2xl w-52 first:bg-white first:text-gray-600   last:hover:bg-blue-400 max-md:text-xl items-center justify-center 
 		max-md:w-44;
 
-    & svg {
-      @apply size-8 mr-2 first:size-7;
-    }
-  }
+		& svg {
+			@apply size-8 mr-2 first:size-7;
+		}
+	}
 
-  &.active {
-    & button {
-      &:first-child {
-        & svg {
-          @apply fill-red-600;
-        }
+	&.active {
+		& button {
+			&:first-child {
+				& svg {
+					@apply fill-red-600;
+				}
 
-        &:hover {
-          @apply fill-white;
-        }
-      }
-    }
-  }
+				&:hover {
+					@apply fill-white;
+				}
+			}
+		}
+	}
 }
 
 .title {
-  @apply flex justify-center items-center text-3xl font-bold mb-5;
+	@apply flex justify-center items-center text-3xl font-bold mb-5;
 
-  & span {
-    @apply block pt-1;
-  }
+	& span {
+		@apply block pt-1;
+	}
 
-  & button {
-    @apply w-10 p-0 bg-white border-none text-black mr-2;
+	& button {
+		@apply w-10 p-0 bg-white border-none text-black mr-2;
 
-    & svg {
-      @apply size-10;
-    }
+		& svg {
+			@apply size-10;
+		}
 
-    & span {
-      @apply flex-1;
-    }
-  }
+		& span {
+			@apply flex-1;
+		}
+	}
 }
 
 .close {
-  @apply bg-white w-12 h-20 rounded-r-2xl;
+	@apply bg-white w-12 h-20 rounded-r-2xl;
 }

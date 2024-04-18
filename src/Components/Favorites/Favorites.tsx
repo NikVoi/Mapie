@@ -9,12 +9,14 @@ import { RootState } from '@/Store/Store'
 import useAutocomplete from '@/Hooks/Dashboard/Search/useAutocomplete'
 import usePlaceSelection from '@/Hooks/Dashboard/Search/usePlaceSelection'
 import { useFavorites } from '@/Hooks/Favorites/UseFavorites'
+import { selectFavorites } from '@/Store/Slices/FavoritesSlice'
 import Input from '../UI/Input/Input'
 import styles from './Favorites.module.scss'
 import Item from './Item/Item'
 
 const Favorites = () => {
 	const dispatch = useDispatch()
+	const favorites = useSelector(selectFavorites)
 
 	const { isFavoritesOpen } = useSelector((state: RootState) => state.dashboard)
 
@@ -25,7 +27,7 @@ const Favorites = () => {
 	const { autocomplete, onLoad } = useAutocomplete()
 	const { handlePlaceSelect } = usePlaceSelection(autocomplete)
 
-	const { favorites, handleRemoveFavorite } = useFavorites()
+	const { handleRemoveFavorite } = useFavorites()
 
 	return (
 		<section
@@ -50,7 +52,7 @@ const Favorites = () => {
 							<Item
 								key={index}
 								placeDetails={favorite}
-								onRemove={handleRemoveFavorite}
+								onRemove={() => handleRemoveFavorite(favorite)}
 							/>
 						))
 					) : (

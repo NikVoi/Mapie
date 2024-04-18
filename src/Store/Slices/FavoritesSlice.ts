@@ -4,7 +4,7 @@ import { RootState } from '../Store'
 import { IFavoritesState } from './Types'
 
 const initialState: IFavoritesState = {
-	places: JSON.parse(localStorage.getItem('favorites') || '[]'),
+	places: [],
 }
 
 const favoritesSlice = createSlice({
@@ -13,16 +13,17 @@ const favoritesSlice = createSlice({
 	reducers: {
 		addPlace: (state, action: PayloadAction<IPlace>) => {
 			state.places.push(action.payload)
-			localStorage.setItem('favorites', JSON.stringify(state.places))
 		},
 		removePlace: (state, action: PayloadAction<string>) => {
 			state.places = state.places.filter(place => place.id !== action.payload)
-			localStorage.setItem('favorites', JSON.stringify(state.places))
+		},
+		clearPlaces: state => {
+			state.places = []
 		},
 	},
 })
 
-export const { addPlace, removePlace } = favoritesSlice.actions
+export const { addPlace, removePlace, clearPlaces } = favoritesSlice.actions
 
 export const selectFavorites = (state: RootState) => state.favorites.places
 

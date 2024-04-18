@@ -1,23 +1,23 @@
 .road {
-  @apply absolute bottom-9 right-48 bg-white pt-12 py-5 px-8 text-2xl font-semibold rounded-3xl text-gray-600;
+	@apply absolute bottom-9 right-48 bg-white pt-12 py-5 px-8 text-2xl font-semibold rounded-3xl text-gray-600 max-md:text-xl max-md:px-4 max-md:pt-10;
 
-  & button {
-    @apply absolute right-1 top-1 size-10 p-0 text-black bg-white border-none;
-  }
+	& button {
+		@apply absolute right-1 top-1 size-10 p-0 text-black bg-white border-none max-md:size-8;
+	}
 }
 
 .wrapper {
-  @apply flex;
+	@apply flex;
 }
 
 .line {
-  @apply relative bg-gray-400 h-2 mb-6 rounded-2xl after:absolute after:content-[''] after:h-2 after:top-0 after:left-0 after:w-2 after:bg-red-400 after:rounded-2xl;
+	@apply relative bg-gray-400 h-2 mb-6 rounded-2xl after:absolute after:content-[''] after:h-2 after:top-0 after:left-0 after:w-2 after:bg-red-400 after:rounded-2xl;
 }
 
 .item {
-  @apply flex flex-col first:mr-10;
+	@apply flex flex-col first:mr-10;
 
-  & span {
-    @apply last:opacity-40 last:font-normal;
-  }
+	& span {
+		@apply last:opacity-40 last:font-normal;
+	}
 }
